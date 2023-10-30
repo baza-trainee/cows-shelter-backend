@@ -1,0 +1,15 @@
+import { CreateUserDto } from './dto/create-user.dto';
+import { User } from './entities/user.entity';
+import { Repository } from 'typeorm';
+export declare class UserService {
+    private readonly userRepository;
+    constructor(userRepository: Repository<User>);
+    create(createUserDto: CreateUserDto): Promise<{
+        user: {
+            username: string;
+            email: string;
+            password: string;
+        } & User;
+    }>;
+    findOne(email: string): Promise<User>;
+}
