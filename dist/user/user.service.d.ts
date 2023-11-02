@@ -6,7 +6,6 @@ export declare class UserService {
     constructor(userRepository: Repository<User>);
     create(createUserDto: CreateUserDto): Promise<{
         user: {
-            username: string;
             email: string;
             password: string;
         } & User;

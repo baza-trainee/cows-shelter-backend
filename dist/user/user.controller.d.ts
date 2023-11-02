@@ -5,7 +5,6 @@ export declare class UserController {
     constructor(userService: UserService);
     create(createUserDto: CreateUserDto): Promise<{
         user: {
-            username: string;
             email: string;
             password: string;
         } & import("./entities/user.entity").User;

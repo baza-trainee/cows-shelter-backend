@@ -18,6 +18,7 @@ export class AuthService {
     if (user && isPasswordsMatch) {
       return user;
     }
+
     throw new BadRequestException({ message: 'Email or password is invalid' });
   }
 

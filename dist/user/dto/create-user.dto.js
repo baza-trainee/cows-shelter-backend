@@ -15,15 +15,11 @@ class CreateUserDto {
 }
 exports.CreateUserDto = CreateUserDto;
 __decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateUserDto.prototype, "username", void 0);
-__decorate([
     (0, class_validator_1.IsEmail)(),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "email", void 0);
 __decorate([
-    (0, class_validator_1.MinLength)(5, { message: 'Password must be minimum 5 symbols' }),
+    (0, class_validator_1.MinLength)(6, { message: 'Password must be minimum 6 symbols' }),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "password", void 0);
 //# sourceMappingURL=create-user.dto.js.map
