@@ -19,7 +19,7 @@ __decorate([
     __metadata("design:type", String)
 ], CreatePartnerDto.prototype, "name", void 0);
 __decorate([
-    (0, class_validator_1.IsEmail)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreatePartnerDto.prototype, "logo", void 0);
 __decorate([

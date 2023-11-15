@@ -1,26 +1,54 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreatePartnerDto } from './dto/create-partner.dto';
 import { UpdatePartnerDto } from './dto/update-partner.dto';
+import { Repository } from 'typeorm';
+import { Partner } from './entities/partner.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class PartnersService {
-  create(createPartnerDto: CreatePartnerDto) {
-    return 'This action adds a new partner';
+  constructor(
+    @InjectRepository(Partner)
+    private readonly partnerRepository: Repository<Partner>,
+  ) {}
+
+  async create(createPartnerDto: CreatePartnerDto) {
+    const isExist = await this.partnerRepository.findOne({
+      where: {
+        link: createPartnerDto.link,
+      },
+    });
+    if (isExist) throw new BadRequestException('Цей Партнер вже існує');
+
+    const newPartner = {
+      name: createPartnerDto.name,
+      logo: createPartnerDto.logo,
+      link: createPartnerDto.link,
+    };
+    return await this.partnerRepository.save(newPartner);
   }
 
-  findAll() {
-    return `This action returns all partners`;
+  async findAll() {
+    return await this.partnerRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} partner`;
+  async update(id: number, updatePartnerDto: UpdatePartnerDto) {
+    const partner = await this.partnerRepository.findOne({
+      where: { id },
+    });
+    if (!partner) throw new NotFoundException('This Partner not found');
+    return await this.partnerRepository.update(id, updatePartnerDto);
   }
 
-  update(id: number, updatePartnerDto: UpdatePartnerDto) {
-    return `This action updates a #${id} partner`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} partner`;
+  async remove(id: number) {
+    const partner = await this.partnerRepository.findOne({
+      where: { id },
+    });
+    if (!partner) throw new NotFoundException('This Partner not found');
+    return await this.partnerRepository.delete(id);
   }
 }
