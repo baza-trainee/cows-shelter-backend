@@ -4,9 +4,12 @@ import { UpdatePartnerDto } from './dto/update-partner.dto';
 export declare class PartnersController {
     private readonly partnersService;
     constructor(partnersService: PartnersService);
-    create(createPartnerDto: CreatePartnerDto): string;
-    findAll(): string;
-    findOne(id: string): string;
-    update(id: string, updatePartnerDto: UpdatePartnerDto): string;
-    remove(id: string): string;
+    create(createPartnerDto: CreatePartnerDto): Promise<{
+        name: string;
+        logo: string;
+        link: string;
+    } & import("./entities/partner.entity").Partner>;
+    findAll(): Promise<import("./entities/partner.entity").Partner[]>;
+    update(id: string, updatePartnerDto: UpdatePartnerDto): Promise<import("typeorm").UpdateResult>;
+    remove(id: string): Promise<import("typeorm").DeleteResult>;
 }

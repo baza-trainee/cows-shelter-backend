@@ -6,6 +6,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { PartnersModule } from './partners/partners.module';
 import { AuthModule } from './auth/auth.module';
+import { NewsModule } from './news/news.module';
+import { ExcursionsModule } from './excursions/excursions.module';
+import { GalleryModule } from './gallery/gallery.module';
+import { ReviewsModule } from './reviews/reviews.module';
+import { ContactsModule } from './contacts/contacts.module';
+import { PdfModule } from './pdf/pdf.module';
 
 @Module({
   imports: [
@@ -24,6 +30,12 @@ import { AuthModule } from './auth/auth.module';
     UserModule,
     AuthModule,
     PartnersModule,
+    NewsModule,
+    ExcursionsModule,
+    GalleryModule,
+    ReviewsModule,
+    ContactsModule,
+    PdfModule,
   ],
   controllers: [AppController],
   providers: [AppService],
