@@ -15,6 +15,12 @@ const typeorm_1 = require("@nestjs/typeorm");
 const user_module_1 = require("./user/user.module");
 const partners_module_1 = require("./partners/partners.module");
 const auth_module_1 = require("./auth/auth.module");
+const news_module_1 = require("./news/news.module");
+const excursions_module_1 = require("./excursions/excursions.module");
+const gallery_module_1 = require("./gallery/gallery.module");
+const reviews_module_1 = require("./reviews/reviews.module");
+const contacts_module_1 = require("./contacts/contacts.module");
+const pdf_module_1 = require("./pdf/pdf.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -36,6 +42,12 @@ exports.AppModule = AppModule = __decorate([
             user_module_1.UserModule,
             auth_module_1.AuthModule,
             partners_module_1.PartnersModule,
+            news_module_1.NewsModule,
+            excursions_module_1.ExcursionsModule,
+            gallery_module_1.GalleryModule,
+            reviews_module_1.ReviewsModule,
+            contacts_module_1.ContactsModule,
+            pdf_module_1.PdfModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
