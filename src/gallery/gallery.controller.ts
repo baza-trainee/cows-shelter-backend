@@ -7,12 +7,18 @@ import {
   Delete,
   Req,
   Query,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { GalleryService } from './gallery.service';
 import { CreateGalleryDto } from './dto/create-gallery.dto';
 import { ApiBody, ApiResponse } from '@nestjs/swagger';
 import { Gallery } from './entities/gallery.entity';
-import { NotFoundResponse } from 'src/types';
+import { NotFoundResponse, UploadImageResponse } from 'src/types';
+import { removeImage, saveImageToStorage } from 'src/helpers/image-storage';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { of } from 'rxjs';
+import { join } from 'path';
 
 @Controller('gallery')
 export class GalleryController {
@@ -89,7 +95,33 @@ export class GalleryController {
     status: 500,
     description: 'internal server error',
   })
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: string, @Body() imageUrl: string) {
+    const filePath = join(process.cwd(), 'uploads/images' + '/' + imageUrl);
+    removeImage(filePath);
     return this.galleryService.remove(+id);
+  }
+
+  @Post('upload')
+  @ApiResponse({
+    status: 201,
+    description: 'upload image',
+    type: UploadImageResponse,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'not found',
+    type: NotFoundResponse,
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'internal server error',
+  })
+  @UseInterceptors(FileInterceptor('file', saveImageToStorage))
+  uploadFile(@UploadedFile() file: Express.Multer.File): any {
+    const fileName = file?.filename;
+    if (!fileName) return of({ error: 'File must be an image' });
+    const imageFolderPath = join(process.cwd(), 'uploads/images');
+    const imageUrl = join(imageFolderPath + '/' + fileName);
+    return imageUrl;
   }
 }

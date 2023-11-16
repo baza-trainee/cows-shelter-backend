@@ -1,3 +1,4 @@
+/// <reference types="multer" />
 import { GalleryService } from './gallery.service';
 import { CreateGalleryDto } from './dto/create-gallery.dto';
 import { Gallery } from './entities/gallery.entity';
@@ -13,4 +14,5 @@ export declare class GalleryController {
     remove(id: string): Promise<{
         success: boolean;
     }>;
+    uploadFile(file: Express.Multer.File): any;
 }

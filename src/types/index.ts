@@ -15,3 +15,8 @@ export class NotFoundResponse {
   @ApiProperty({ default: 'item with id=% doesn`t exist' })
   message: string;
 }
+
+export class UploadImageResponse {
+  @ApiProperty()
+  imageUrl: string;
+}

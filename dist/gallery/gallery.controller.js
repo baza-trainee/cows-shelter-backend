@@ -19,6 +19,10 @@ const create_gallery_dto_1 = require("./dto/create-gallery.dto");
 const swagger_1 = require("@nestjs/swagger");
 const gallery_entity_1 = require("./entities/gallery.entity");
 const types_1 = require("../types");
+const image_storage_1 = require("../helpers/image-storage");
+const platform_express_1 = require("@nestjs/platform-express");
+const rxjs_1 = require("rxjs");
+const path_1 = require("path");
 let GalleryController = class GalleryController {
     constructor(galleryService) {
         this.galleryService = galleryService;
@@ -37,6 +41,13 @@ let GalleryController = class GalleryController {
     }
     remove(id) {
         return this.galleryService.remove(+id);
+    }
+    uploadFile(file) {
+        const fileName = file?.filename;
+        if (!fileName)
+            return (0, rxjs_1.of)({ error: 'File must be an image' });
+        const imagePath = (0, path_1.join)('uploads/images' + '/' + fileName);
+        return imagePath;
     }
 };
 exports.GalleryController = GalleryController;
@@ -122,6 +133,14 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], GalleryController.prototype, "remove", null);
+__decorate([
+    (0, common_1.Post)('upload'),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file', image_storage_1.saveImageToStorage)),
+    __param(0, (0, common_1.UploadedFile)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Object)
+], GalleryController.prototype, "uploadFile", null);
 exports.GalleryController = GalleryController = __decorate([
     (0, common_1.Controller)('gallery'),
     __metadata("design:paramtypes", [gallery_service_1.GalleryService])

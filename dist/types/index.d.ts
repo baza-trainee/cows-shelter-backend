@@ -7,3 +7,6 @@ export declare class NotFoundResponse {
     status_code: number;
     message: string;
 }
+export declare class UploadImageResponse {
+    imageUrl: string;
+}
