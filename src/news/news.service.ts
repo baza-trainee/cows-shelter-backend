@@ -13,7 +13,7 @@ export class NewsService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} news`;
+    return `This action returns a #${{where: {id}}} news`;
   }
 
   update(id: number, updateNewsDto: UpdateNewsDto) {

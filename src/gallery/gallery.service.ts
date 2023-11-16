@@ -19,17 +19,17 @@ export class GalleryService {
   }
 
   async findAll() {
-    const images = await this.galleryRepository.find({
+    const [images] = await Promise.all([this.galleryRepository.find({
       order: {
         createdAt: 'DESC',
       },
-    });
+    })]);
     return images;
   }
 
   async findOne(id: number) {
     const image = await this.galleryRepository.findOne({
-      where: { id },
+      where: {id},
     });
     if (!image) throw new NotFoundException('image not found');
     return image;
@@ -45,7 +45,8 @@ export class GalleryService {
   }
 
   async findAllWithPagination(page: number, limit: number) {
-    const images = await this.galleryRepository.find({
+    let images: Gallery[];
+    images = await this.galleryRepository.find({
       order: {
         createdAt: 'DESC',
       },

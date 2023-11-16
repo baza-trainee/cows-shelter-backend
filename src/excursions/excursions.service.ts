@@ -13,7 +13,7 @@ export class ExcursionsService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} excursion`;
+    return `This action returns a #${{where: {id}}} excursion`;
   }
 
   update(id: number, updateExcursionDto: UpdateExcursionDto) {

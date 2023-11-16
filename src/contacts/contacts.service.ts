@@ -13,7 +13,7 @@ export class ContactsService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} contact`;
+    return `This action returns a #${{where: {id}}} contact`;
   }
 
   update(id: number, updateContactDto: UpdateContactDto) {
