@@ -1,11 +1,24 @@
-import { Injectable } from '@nestjs/common';
-import { CreatePdfDto } from './dto/create-pdf.dto';
-import { UpdatePdfDto } from './dto/update-pdf.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { CreateReviewDto } from './dto/create-review.dto';
+import { UpdateReviewDto } from './dto/update-review.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Review } from './entities/review.entity';
+import {CreatePdfDto} from "./dto/create-pdf.dto";
 
 @Injectable()
 export class PdfService {
-  create(createPdfDto: CreatePdfDto) {
-    return 'This action adds a new pdf';
+
+  constructor(
+      @InjectRepository(Review)
+      private readonly pdfRepository: Repository<Pdf>,
+  ) {}
+  async create(createPdfDto: CreatePdfDto) {
+    const newPdf = {
+      title: CreatePdfDto.title,
+      document_url: CreatePdfDto.document_url,
+    };
+    return await this.pdfRepository.save(newPdf);
   }
 
   findAll() {
