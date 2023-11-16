@@ -49,7 +49,8 @@ let GalleryService = class GalleryService {
         });
         if (!image)
             throw new common_1.NotFoundException('image not found');
-        return await this.galleryRepository.delete(id);
+        await this.galleryRepository.delete(id);
+        return { success: true };
     }
     async findAllWithPagination(page, limit) {
         const images = await this.galleryRepository.find({

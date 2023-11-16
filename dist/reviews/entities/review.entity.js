@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Review = void 0;
+const swagger_1 = require("@nestjs/swagger");
 const typeorm_1 = require("typeorm");
 let Review = class Review {
 };
@@ -19,18 +20,22 @@ __decorate([
     __metadata("design:type", Number)
 ], Review.prototype, "id", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Reviewer`s name in ukrainian' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Review.prototype, "name_ua", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Reviewer`s name in english' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Review.prototype, "name_en", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Review text  in ukrainian' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Review.prototype, "text_ua", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Review text in english' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Review.prototype, "text_en", void 0);

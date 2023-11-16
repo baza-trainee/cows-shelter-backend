@@ -12,5 +12,7 @@ export declare class PartnersService {
     } & Partner>;
     findAll(): Promise<Partner[]>;
     update(id: number, updatePartnerDto: UpdatePartnerDto): Promise<import("typeorm").UpdateResult>;
-    remove(id: number): Promise<import("typeorm").DeleteResult>;
+    remove(id: number): Promise<{
+        success: boolean;
+    }>;
 }

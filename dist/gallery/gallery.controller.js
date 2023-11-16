@@ -16,6 +16,9 @@ exports.GalleryController = void 0;
 const common_1 = require("@nestjs/common");
 const gallery_service_1 = require("./gallery.service");
 const create_gallery_dto_1 = require("./dto/create-gallery.dto");
+const swagger_1 = require("@nestjs/swagger");
+const gallery_entity_1 = require("./entities/gallery.entity");
+const types_1 = require("../types");
 let GalleryController = class GalleryController {
     constructor(galleryService) {
         this.galleryService = galleryService;
@@ -39,6 +42,16 @@ let GalleryController = class GalleryController {
 exports.GalleryController = GalleryController;
 __decorate([
     (0, common_1.Get)('pagination'),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'get all images', type: [gallery_entity_1.Gallery] }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'not found',
+        type: types_1.NotFoundResponse,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Query)('page')),
     __param(2, (0, common_1.Query)('limit')),
@@ -48,6 +61,12 @@ __decorate([
 ], GalleryController.prototype, "findAllWithPagination", null);
 __decorate([
     (0, common_1.Post)(),
+    (0, swagger_1.ApiBody)({ type: create_gallery_dto_1.CreateGalleryDto }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'create gallery', type: gallery_entity_1.Gallery }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_gallery_dto_1.CreateGalleryDto]),
@@ -55,12 +74,32 @@ __decorate([
 ], GalleryController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'get all images', type: [gallery_entity_1.Gallery] }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'not found',
+        type: types_1.NotFoundResponse,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], GalleryController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'get  image by id', type: gallery_entity_1.Gallery }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'not found',
+        type: types_1.NotFoundResponse,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -68,6 +107,16 @@ __decorate([
 ], GalleryController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Delete)(':id'),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'delete image' }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'not found',
+        type: types_1.NotFoundResponse,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

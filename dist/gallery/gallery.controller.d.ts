@@ -1,13 +1,16 @@
 import { GalleryService } from './gallery.service';
 import { CreateGalleryDto } from './dto/create-gallery.dto';
+import { Gallery } from './entities/gallery.entity';
 export declare class GalleryController {
     private readonly galleryService;
     constructor(galleryService: GalleryService);
-    findAllWithPagination(req: any, page?: number, limit?: number): Promise<import("./entities/gallery.entity").Gallery[]>;
+    findAllWithPagination(req: any, page?: number, limit?: number): Promise<Gallery[]>;
     create(createGalleryDto: CreateGalleryDto): Promise<{
         image_url: string;
-    } & import("./entities/gallery.entity").Gallery>;
-    findAll(): Promise<import("./entities/gallery.entity").Gallery[]>;
-    findOne(id: string): Promise<import("./entities/gallery.entity").Gallery>;
-    remove(id: string): Promise<import("typeorm").DeleteResult>;
+    } & Gallery>;
+    findAll(): Promise<Gallery[]>;
+    findOne(id: string): Promise<Gallery>;
+    remove(id: string): Promise<{
+        success: boolean;
+    }>;
 }

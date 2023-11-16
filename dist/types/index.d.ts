@@ -1,4 +1,9 @@
-export interface IUser {
+export declare class IUser {
     id: string;
     email: string;
+    access_token: string;
+}
+export declare class NotFoundResponse {
+    status_code: number;
+    message: string;
 }

@@ -17,6 +17,9 @@ const common_1 = require("@nestjs/common");
 const partners_service_1 = require("./partners.service");
 const create_partner_dto_1 = require("./dto/create-partner.dto");
 const update_partner_dto_1 = require("./dto/update-partner.dto");
+const swagger_1 = require("@nestjs/swagger");
+const partner_entity_1 = require("./entities/partner.entity");
+const types_1 = require("../types");
 let PartnersController = class PartnersController {
     constructor(partnersService) {
         this.partnersService = partnersService;
@@ -37,6 +40,12 @@ let PartnersController = class PartnersController {
 exports.PartnersController = PartnersController;
 __decorate([
     (0, common_1.Post)(),
+    (0, swagger_1.ApiBody)({ type: create_partner_dto_1.CreatePartnerDto }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'create partner', type: partner_entity_1.Partner }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_partner_dto_1.CreatePartnerDto]),
@@ -44,12 +53,40 @@ __decorate([
 ], PartnersController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'get all partners',
+        type: [partner_entity_1.Partner],
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'not found',
+        type: types_1.NotFoundResponse,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], PartnersController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Patch)(':id'),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'update partner',
+        type: partner_entity_1.Partner,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'not found',
+        type: types_1.NotFoundResponse,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -58,6 +95,16 @@ __decorate([
 ], PartnersController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'delete partner' }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'not found',
+        type: types_1.NotFoundResponse,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

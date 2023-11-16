@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Partner = void 0;
+const swagger_1 = require("@nestjs/swagger");
 const typeorm_1 = require("typeorm");
 let Partner = class Partner {
 };
@@ -19,14 +20,17 @@ __decorate([
     __metadata("design:type", Number)
 ], Partner.prototype, "id", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Partner`s name' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Partner.prototype, "name", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Partner`s logo' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Partner.prototype, "logo", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Link to partner`s website' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Partner.prototype, "link", void 0);

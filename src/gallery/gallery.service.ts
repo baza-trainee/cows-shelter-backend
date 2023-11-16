@@ -40,7 +40,8 @@ export class GalleryService {
       where: { id },
     });
     if (!image) throw new NotFoundException('image not found');
-    return await this.galleryRepository.delete(id);
+    await this.galleryRepository.delete(id);
+    return { success: true };
   }
 
   async findAllWithPagination(page: number, limit: number) {
