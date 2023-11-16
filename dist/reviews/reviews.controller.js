@@ -25,23 +25,33 @@ let ReviewsController = class ReviewsController {
         this.reviewsService = reviewsService;
     }
     create(createReviewDto) {
-        return this.reviewsService.create(createReviewDto);
+        return this.reviewsService
+            .create(createReviewDto);
     }
     findAll() {
-        return this.reviewsService.findAll();
+        return this.reviewsService
+            .findAll();
     }
     update(id, updateReviewDto) {
-        return this.reviewsService.update(+id, updateReviewDto);
+        return this.reviewsService
+            .update(+id, updateReviewDto);
     }
     remove(id) {
-        return this.reviewsService.remove(+id);
+        return this.reviewsService
+            .remove(+id);
     }
 };
 exports.ReviewsController = ReviewsController;
 __decorate([
     (0, common_1.Post)(),
-    (0, swagger_1.ApiBody)({ type: create_review_dto_1.CreateReviewDto }),
-    (0, swagger_1.ApiResponse)({ status: 201, description: 'create review', type: review_entity_1.Review }),
+    (0, swagger_1.ApiBody)({
+        type: create_review_dto_1.CreateReviewDto
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'create review',
+        type: review_entity_1.Review
+    }),
     (0, swagger_1.ApiResponse)({
         status: 500,
         description: 'internal server error',
@@ -53,7 +63,11 @@ __decorate([
 ], ReviewsController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
-    (0, swagger_1.ApiResponse)({ status: 201, description: 'get all reviews', type: [review_entity_1.Review] }),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'get all reviews',
+        type: [review_entity_1.Review]
+    }),
     (0, swagger_1.ApiResponse)({
         status: 404,
         description: 'not found',
@@ -69,8 +83,14 @@ __decorate([
 ], ReviewsController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Patch)(':id'),
-    (0, swagger_1.ApiBody)({ type: update_review_dto_1.UpdateReviewDto }),
-    (0, swagger_1.ApiResponse)({ status: 201, description: 'update review', type: review_entity_1.Review }),
+    (0, swagger_1.ApiBody)({
+        type: update_review_dto_1.UpdateReviewDto
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'update review',
+        type: review_entity_1.Review
+    }),
     (0, swagger_1.ApiResponse)({
         status: 404,
         description: 'not found',
@@ -88,7 +108,10 @@ __decorate([
 ], ReviewsController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
-    (0, swagger_1.ApiResponse)({ status: 201, description: 'delete review' }),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'delete review'
+    }),
     (0, swagger_1.ApiResponse)({
         status: 404,
         description: 'not found',

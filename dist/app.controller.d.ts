@@ -8,4 +8,5 @@ export declare class AppController {
         access_token: string;
     }>;
     getProfile(req: any): any;
+    getHello: () => any;
 }

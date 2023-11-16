@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PDF = void 0;
 const typeorm_1 = require("typeorm");
+const swagger_1 = require("@nestjs/swagger");
 let PDF = class PDF {
 };
 exports.PDF = PDF;
@@ -19,10 +20,12 @@ __decorate([
     __metadata("design:type", Number)
 ], PDF.prototype, "id", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'PDF`s title' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], PDF.prototype, "title", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'PDF-document URL' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], PDF.prototype, "document_url", void 0);

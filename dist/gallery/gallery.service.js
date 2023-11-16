@@ -25,14 +25,15 @@ let GalleryService = class GalleryService {
         const newImage = {
             image_url: createGalleryDto.image_url,
         };
-        return await this.galleryRepository.save(newImage);
+        return await this.galleryRepository
+            .save(newImage);
     }
     async findAll() {
-        const images = await this.galleryRepository.find({
-            order: {
-                createdAt: 'DESC',
-            },
-        });
+        const [images] = await Promise.all([this.galleryRepository.find({
+                order: {
+                    createdAt: 'DESC',
+                },
+            })]);
         return images;
     }
     async findOne(id) {
@@ -53,13 +54,13 @@ let GalleryService = class GalleryService {
         return { success: true };
     }
     async findAllWithPagination(page, limit) {
-        const images = await this.galleryRepository.find({
-            order: {
-                createdAt: 'DESC',
-            },
-            take: limit,
-            skip: (page - 1) * limit,
-        });
+        const [images] = await Promise.all([this.galleryRepository.find({
+                order: {
+                    createdAt: 'DESC',
+                },
+                take: limit,
+                skip: (page - 1) * limit,
+            })]);
         return images;
     }
 };

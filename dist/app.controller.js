@@ -23,6 +23,9 @@ const types_1 = require("./types");
 let AppController = class AppController {
     constructor(authService) {
         this.authService = authService;
+        this.getHello = () => {
+            return undefined;
+        };
     }
     async login(req) {
         return this.authService.login(req.user);

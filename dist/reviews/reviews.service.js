@@ -28,31 +28,43 @@ let ReviewsService = class ReviewsService {
             text_ua: createReviewDto.text_ua,
             text_en: createReviewDto.text_en,
         };
-        return await this.reviewRepository.save(newReview);
+        return await this.reviewRepository
+            .save(newReview);
     }
     async findAll() {
-        return this.reviewRepository.find({
+        return this.reviewRepository
+            .find({
             order: {
                 createdAt: 'DESC',
             },
         });
     }
     async update(id, updateReviewDto) {
-        const review = await this.reviewRepository.findOne({
-            where: { id },
+        const review = await this.reviewRepository
+            .findOne({
+            where: {
+                id
+            },
         });
         if (!review)
             throw new common_1.NotFoundException('This review not found');
-        return await this.reviewRepository.update(id, updateReviewDto);
+        return await this.reviewRepository
+            .update(id, updateReviewDto);
     }
     async remove(id) {
-        const review = await this.reviewRepository.findOne({
-            where: { id },
+        const review = await this.reviewRepository
+            .findOne({
+            where: {
+                id
+            },
         });
         if (!review)
             throw new common_1.NotFoundException('This review not found');
-        await this.reviewRepository.delete(id);
-        return { success: true };
+        await this.reviewRepository
+            .delete(id);
+        return {
+            success: true
+        };
     }
 };
 exports.ReviewsService = ReviewsService;

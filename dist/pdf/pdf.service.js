@@ -5,28 +5,78 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PdfService = void 0;
 const common_1 = require("@nestjs/common");
+const typeorm_1 = require("@nestjs/typeorm");
+const typeorm_2 = require("typeorm");
+const pdf_entity_1 = require("./entities/pdf.entity");
 let PdfService = class PdfService {
-    create(createPdfDto) {
-        return 'This action adds a new pdf';
+    constructor(pdfRepository) {
+        this.pdfRepository = pdfRepository;
     }
-    findAll() {
-        return `This action returns all pdf`;
+    async create(createPdfDto) {
+        const newPdf = {
+            title: createPdfDto.title,
+            document_url: createPdfDto.document_url,
+        };
+        return await this.pdfRepository
+            .save(newPdf);
     }
-    findOne(id) {
-        return `This action returns a #${id} pdf`;
+    async findAll() {
+        return this.pdfRepository
+            .find({
+            order: {
+                createdAt: 'DESC',
+            },
+        });
     }
-    update(id, updatePdfDto) {
-        return `This action updates a #${id} pdf`;
+    async findOne(number) {
+        return this.pdfRepository
+            .find({
+            order: {
+                createdAt: 'DESC',
+            },
+        });
     }
-    remove(id) {
-        return `This action removes a #${id} pdf`;
+    async update(id, updatePdfDto) {
+        const pdf = await this.pdfRepository
+            .findOne({
+            where: {
+                id
+            },
+        });
+        if (!pdf)
+            throw new common_1.NotFoundException('This review not found');
+        return await this.pdfRepository
+            .update(id, updatePdfDto);
+    }
+    async remove(id) {
+        const pdf = await this.pdfRepository
+            .findOne({
+            where: {
+                id
+            },
+        });
+        if (!pdf)
+            throw new common_1.NotFoundException('This review not found');
+        await this.pdfRepository
+            .delete(id);
+        return {
+            success: true
+        };
     }
 };
 exports.PdfService = PdfService;
 exports.PdfService = PdfService = __decorate([
-    (0, common_1.Injectable)()
+    (0, common_1.Injectable)(),
+    __param(0, (0, typeorm_1.InjectRepository)(pdf_entity_1.PDF)),
+    __metadata("design:paramtypes", [typeorm_2.Repository])
 ], PdfService);
 //# sourceMappingURL=pdf.service.js.map
