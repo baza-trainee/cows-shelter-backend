@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -10,6 +11,7 @@ export class Gallery {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ApiProperty({ description: 'Url of the image' })
   @Column()
   image_url: string;
 

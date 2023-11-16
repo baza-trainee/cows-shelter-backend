@@ -17,6 +17,9 @@ const common_1 = require("@nestjs/common");
 const local_auth_guard_1 = require("./auth/local-auth.guard");
 const auth_service_1 = require("./auth/auth.service");
 const jwt_auth_guard_1 = require("./auth/jwt-auth.guard");
+const swagger_1 = require("@nestjs/swagger");
+const create_user_dto_1 = require("./user/dto/create-user.dto");
+const types_1 = require("./types");
 let AppController = class AppController {
     constructor(authService) {
         this.authService = authService;
@@ -32,6 +35,12 @@ exports.AppController = AppController;
 __decorate([
     (0, common_1.UseGuards)(local_auth_guard_1.LocalAuthGuard),
     (0, common_1.Post)('auth/login'),
+    (0, swagger_1.ApiBody)({ type: create_user_dto_1.CreateUserDto }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'get all reviews', type: types_1.IUser }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -40,6 +49,11 @@ __decorate([
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Get)('profile'),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'get all reviews', type: types_1.IUser }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),

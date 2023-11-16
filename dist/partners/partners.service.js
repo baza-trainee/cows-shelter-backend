@@ -53,7 +53,8 @@ let PartnersService = class PartnersService {
         });
         if (!partner)
             throw new common_1.NotFoundException('This Partner not found');
-        return await this.partnerRepository.delete(id);
+        await this.partnerRepository.delete(id);
+        return { success: true };
     }
 };
 exports.PartnersService = PartnersService;

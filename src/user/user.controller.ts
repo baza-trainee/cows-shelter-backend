@@ -7,6 +7,8 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
+import { ApiBody, ApiResponse } from '@nestjs/swagger';
+import { IUser } from 'src/types';
 
 @Controller('user')
 export class UserController {
@@ -14,6 +16,12 @@ export class UserController {
 
   @Post()
   @UsePipes(new ValidationPipe())
+  @ApiBody({ type: CreateUserDto })
+  @ApiResponse({ status: 201, description: 'get all reviews', type: IUser })
+  @ApiResponse({
+    status: 500,
+    description: 'internal server error',
+  })
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }

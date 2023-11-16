@@ -49,6 +49,7 @@ export class PartnersService {
       where: { id },
     });
     if (!partner) throw new NotFoundException('This Partner not found');
-    return await this.partnerRepository.delete(id);
+    await this.partnerRepository.delete(id);
+    return { success: true };
   }
 }

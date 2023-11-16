@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -10,12 +11,15 @@ export class Partner {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ApiProperty({ description: 'Partner`s name' })
   @Column()
   name: string;
 
+  @ApiProperty({ description: 'Partner`s logo' })
   @Column()
   logo: string;
 
+  @ApiProperty({ description: 'Link to partner`s website' })
   @Column()
   link: string;
 
