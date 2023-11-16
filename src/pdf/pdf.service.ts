@@ -1,39 +1,70 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateReviewDto } from './dto/create-review.dto';
-import { UpdateReviewDto } from './dto/update-review.dto';
+import {
+  Injectable, NotFoundException
+} from '@nestjs/common';
+import { CreatePdfDto } from './dto/create-pdf.dto';
+import { UpdatePdfDto } from './dto/update-pdf.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Review } from './entities/review.entity';
-import {CreatePdfDto} from "./dto/create-pdf.dto";
+import { PDF } from './entities/pdf.entity';
 
 @Injectable()
 export class PdfService {
-
   constructor(
-      @InjectRepository(Review)
-      private readonly pdfRepository: Repository<Pdf>,
+      @InjectRepository(PDF)
+      private readonly pdfRepository: Repository<PDF>,
   ) {}
+
   async create(createPdfDto: CreatePdfDto) {
     const newPdf = {
-      title: CreatePdfDto.title,
-      document_url: CreatePdfDto.document_url,
+      title: createPdfDto.title,
+      document_url: createPdfDto.document_url,
     };
-    return await this.pdfRepository.save(newPdf);
+    return await this.pdfRepository
+        .save(newPdf);
   }
 
-  findAll() {
-    return `This action returns all pdf`;
+  async findAll() {
+    return this.pdfRepository
+        .find({
+      order: {
+        createdAt: 'DESC', // 'ASC'
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} pdf`;
+  async findOne(number: number) {
+    return this.pdfRepository
+        .find({
+      order: {
+        createdAt: 'DESC', // 'ASC'
+      },
+    });
   }
 
-  update(id: number, updatePdfDto: UpdatePdfDto) {
-    return `This action updates a #${id} pdf`;
+  async update(id: number, updatePdfDto: UpdatePdfDto) {
+    const pdf = await this.pdfRepository
+        .findOne({
+      where: {
+        id
+      },
+    });
+    if (!pdf) throw new NotFoundException('This review not found');
+    return await this.pdfRepository
+        .update(id, updatePdfDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} pdf`;
+  async remove(id: number) {
+    const pdf = await this.pdfRepository
+        .findOne({
+      where: {
+        id
+      },
+    });
+    if (!pdf) throw new NotFoundException('This review not found');
+    await this.pdfRepository
+        .delete(id);
+    return {
+      success: true
+    };
   }
 }

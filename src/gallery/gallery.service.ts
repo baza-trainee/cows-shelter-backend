@@ -1,4 +1,7 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException
+} from '@nestjs/common';
 import { CreateGalleryDto } from './dto/create-gallery.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -20,11 +23,11 @@ export class GalleryService {
   }
 
   async findAll() {
-    const images = await this.galleryRepository.find({
+    const [images] = await Promise.all([this.galleryRepository.find({
       order: {
         createdAt: 'DESC',
       },
-    });
+    })]);
     return images;
   }
 
@@ -46,13 +49,13 @@ export class GalleryService {
   }
 
   async findAllWithPagination(page: number, limit: number) {
-    const images = await this.galleryRepository.find({
+    const [images] = await Promise.all([this.galleryRepository.find({
       order: {
         createdAt: 'DESC',
       },
       take: limit,
       skip: (page - 1) * limit,
-    });
+    })]);
     return images;
   }
 }

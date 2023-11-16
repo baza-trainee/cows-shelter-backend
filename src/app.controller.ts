@@ -32,4 +32,8 @@ export class AppController {
   getProfile(@Request() req) {
     return req.user;
   }
+
+  getHello = () => {
+    return undefined;
+  }
 }
