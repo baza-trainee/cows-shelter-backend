@@ -9,20 +9,24 @@ import {
   Query,
   UseInterceptors,
   UploadedFile,
+  ParseFilePipe,
+  MaxFileSizeValidator,
+  FileTypeValidator,
 } from '@nestjs/common';
 import { GalleryService } from './gallery.service';
 import { CreateGalleryDto } from './dto/create-gallery.dto';
 import { ApiBody, ApiResponse } from '@nestjs/swagger';
 import { Gallery } from './entities/gallery.entity';
 import { NotFoundResponse, UploadImageResponse } from '../types';
-import { removeImage, saveImageToStorage } from '../helpers/image-storage';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { of } from 'rxjs';
-import { join } from 'path';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Controller('gallery')
 export class GalleryController {
-  constructor(private readonly galleryService: GalleryService) {}
+  constructor(
+    private readonly galleryService: GalleryService,
+    private readonly cloudinaryService: CloudinaryService,
+  ) {}
 
   @Get('pagination')
   @ApiResponse({ status: 201, description: 'get all images', type: [Gallery] })
@@ -95,9 +99,7 @@ export class GalleryController {
     status: 500,
     description: 'internal server error',
   })
-  remove(@Param('id') id: string, @Body() imageUrl: string) {
-    const filePath = join(process.cwd(), 'uploads/images' + '/' + imageUrl);
-    removeImage(filePath);
+  remove(@Param('id') id: string) {
     return this.galleryService.remove(+id);
   }
 
@@ -116,12 +118,42 @@ export class GalleryController {
     status: 500,
     description: 'internal server error',
   })
-  @UseInterceptors(FileInterceptor('file', saveImageToStorage))
-  uploadFile(@UploadedFile() file: Express.Multer.File): any {
-    const fileName = file?.filename;
-    if (!fileName) return of({ error: 'File must be an image' });
-    const imageFolderPath = join(process.cwd(), 'uploads/images');
-    const imageUrl = join(imageFolderPath + '/' + fileName);
-    return imageUrl;
+  @UseInterceptors(FileInterceptor('file'))
+  uploadFile(
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 4 }),
+          new FileTypeValidator({ fileType: '.(png|jpg|jpeg|webp)' }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
+  ): any {
+    return this.cloudinaryService.uploadImage(file);
   }
+
+  // @Post('upload')
+  // @ApiResponse({
+  //   status: 201,
+  //   description: 'upload image',
+  //   type: UploadImageResponse,
+  // })
+  // @ApiResponse({
+  //   status: 404,
+  //   description: 'not found',
+  //   type: NotFoundResponse,
+  // })
+  // @ApiResponse({
+  //   status: 500,
+  //   description: 'internal server error',
+  // })
+  // @UseInterceptors(FileInterceptor('file', saveImageToStorage))
+  // uploadFile(@UploadedFile() file: Express.Multer.File): any {
+  //   const fileName = file?.filename;
+  //   if (!fileName) return of({ error: 'File must be an image' });
+  //   const imageFolderPath = join(process.cwd(), 'uploads/images');
+  //   const imageUrl = join(imageFolderPath + '/' + fileName);
+  //   return imageUrl;
+  // }
 }
