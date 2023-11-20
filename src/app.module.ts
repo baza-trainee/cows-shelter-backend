@@ -16,6 +16,7 @@ import { PasswordModule } from './password/password.module';
 import { MailingModule } from './mailing/mailing.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
     PdfModule,
     PasswordModule,
     MailingModule,
+    CloudinaryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
