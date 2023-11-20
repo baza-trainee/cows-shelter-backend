@@ -8,7 +8,7 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ApiBody, ApiResponse } from '@nestjs/swagger';
-import { IUser } from 'src/types';
+import { IUser } from '../types';
 
 @Controller('user')
 export class UserController {

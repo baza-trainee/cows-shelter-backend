@@ -12,7 +12,7 @@ import { CreatePartnerDto } from './dto/create-partner.dto';
 import { UpdatePartnerDto } from './dto/update-partner.dto';
 import { ApiBody, ApiResponse } from '@nestjs/swagger';
 import { Partner } from './entities/partner.entity';
-import { NotFoundResponse } from 'src/types';
+import { NotFoundResponse } from '../types';
 
 @Controller('partners')
 export class PartnersController {

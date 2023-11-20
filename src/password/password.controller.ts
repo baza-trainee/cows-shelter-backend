@@ -1,7 +1,7 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { PasswordService } from './password.service';
 import { JwtService } from '@nestjs/jwt';
-import { MailingService } from 'src/mailing/mailing.service';
+import { MailingService } from '../mailing/mailing.service';
 import { MailerService } from '@nestjs-modules/mailer';
 
 @Controller('password')

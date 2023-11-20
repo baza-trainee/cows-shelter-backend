@@ -12,7 +12,7 @@ import { CreateReviewDto } from './dto/create-review.dto';
 import { UpdateReviewDto } from './dto/update-review.dto';
 import { ApiBody, ApiResponse } from '@nestjs/swagger';
 import { Review } from './entities/review.entity';
-import { NotFoundResponse } from 'src/types';
+import { NotFoundResponse } from '../types';
 
 @Controller('reviews')
 export class ReviewsController {
