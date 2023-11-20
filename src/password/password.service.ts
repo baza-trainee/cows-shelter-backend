@@ -8,8 +8,8 @@ import { Password } from './entities/password.entity';
 import { Repository } from 'typeorm';
 import { MailerService } from '@nestjs-modules/mailer';
 import { JwtService } from '@nestjs/jwt';
-import { MailingService } from 'src/mailing/mailing.service';
-import { UserService } from 'src/user/user.service';
+import { MailingService } from '../mailing/mailing.service';
+import { UserService } from '../user/user.service';
 import * as argon2 from 'argon2';
 
 @Injectable()

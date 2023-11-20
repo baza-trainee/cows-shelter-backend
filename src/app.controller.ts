@@ -4,12 +4,12 @@ import { AuthService } from './auth/auth.service';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { ApiBody, ApiResponse } from '@nestjs/swagger';
 import { CreateUserDto } from './user/dto/create-user.dto';
-import { IUser } from 'src/types';
+import { IUser } from './types';
 
 @Controller()
 export class AppController {
   getHello(): any {
-      throw new Error('Method not implemented.');
+    throw new Error('Method not implemented.');
   }
   constructor(private authService: AuthService) {}
 
