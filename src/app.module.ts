@@ -12,6 +12,10 @@ import { GalleryModule } from './gallery/gallery.module';
 import { ReviewsModule } from './reviews/reviews.module';
 import { ContactsModule } from './contacts/contacts.module';
 import { PdfModule } from './pdf/pdf.module';
+import { PasswordModule } from './password/password.module';
+import { MailingModule } from './mailing/mailing.module';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 
 @Module({
   imports: [
@@ -27,6 +31,16 @@ import { PdfModule } from './pdf/pdf.module';
       }),
       inject: [ConfigService],
     }),
+    MailerModule.forRoot({
+      transport: 'smtps://user@domain.com:pass@smtp.domain.com',
+      template: {
+        dir: process.cwd() + '/templates/',
+        adapter: new HandlebarsAdapter(),
+        options: {
+          strict: true,
+        },
+      },
+    }),
     UserModule,
     AuthModule,
     PartnersModule,
@@ -36,6 +50,8 @@ import { PdfModule } from './pdf/pdf.module';
     ReviewsModule,
     ContactsModule,
     PdfModule,
+    PasswordModule,
+    MailingModule,
   ],
   controllers: [AppController],
   providers: [AppService],

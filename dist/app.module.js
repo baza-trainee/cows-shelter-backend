@@ -21,6 +21,10 @@ const gallery_module_1 = require("./gallery/gallery.module");
 const reviews_module_1 = require("./reviews/reviews.module");
 const contacts_module_1 = require("./contacts/contacts.module");
 const pdf_module_1 = require("./pdf/pdf.module");
+const password_module_1 = require("./password/password.module");
+const mailing_module_1 = require("./mailing/mailing.module");
+const mailer_1 = require("@nestjs-modules/mailer");
+const handlebars_adapter_1 = require("@nestjs-modules/mailer/dist/adapters/handlebars.adapter");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -39,6 +43,16 @@ exports.AppModule = AppModule = __decorate([
                 }),
                 inject: [config_1.ConfigService],
             }),
+            mailer_1.MailerModule.forRoot({
+                transport: 'smtps://user@domain.com:pass@smtp.domain.com',
+                template: {
+                    dir: process.cwd() + '/templates/',
+                    adapter: new handlebars_adapter_1.HandlebarsAdapter(),
+                    options: {
+                        strict: true,
+                    },
+                },
+            }),
             user_module_1.UserModule,
             auth_module_1.AuthModule,
             partners_module_1.PartnersModule,
@@ -48,6 +62,8 @@ exports.AppModule = AppModule = __decorate([
             reviews_module_1.ReviewsModule,
             contacts_module_1.ContactsModule,
             pdf_module_1.PdfModule,
+            password_module_1.PasswordModule,
+            mailing_module_1.MailingModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

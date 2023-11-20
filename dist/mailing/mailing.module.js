@@ -5,19 +5,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ForgotPasswordDto = void 0;
-const swagger_1 = require("@nestjs/swagger");
-const class_validator_1 = require("class-validator");
-class ForgotPasswordDto {
-}
-exports.ForgotPasswordDto = ForgotPasswordDto;
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, swagger_1.ApiProperty)(),
-    __metadata("design:type", String)
-], ForgotPasswordDto.prototype, "email", void 0);
-//# sourceMappingURL=forgot-password.dto.js.map
+exports.MailingModule = void 0;
+const common_1 = require("@nestjs/common");
+const mailing_service_1 = require("./mailing.service");
+const mailing_controller_1 = require("./mailing.controller");
+const config_1 = require("@nestjs/config");
+let MailingModule = class MailingModule {
+};
+exports.MailingModule = MailingModule;
+exports.MailingModule = MailingModule = __decorate([
+    (0, common_1.Module)({
+        controllers: [mailing_controller_1.MailingController],
+        providers: [mailing_service_1.MailingService, config_1.ConfigService],
+    })
+], MailingModule);
+//# sourceMappingURL=mailing.module.js.map

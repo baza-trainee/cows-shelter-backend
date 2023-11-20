@@ -21,6 +21,9 @@ const swagger_1 = require("@nestjs/swagger");
 const create_user_dto_1 = require("./user/dto/create-user.dto");
 const types_1 = require("./types");
 let AppController = class AppController {
+    getHello() {
+        throw new Error('Method not implemented.');
+    }
     constructor(authService) {
         this.authService = authService;
     }
