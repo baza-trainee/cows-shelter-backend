@@ -17,4 +17,17 @@ export class PasswordController {
   async forgotPassword(@Body('email') email: string) {
     return this.passwordService.sendMail(email);
   }
+
+  @Post('reset')
+  resetPassword(
+    @Body('token') token: string,
+    @Body('password') password: string,
+    @Body('confirm_password') confirm_password: string,
+  ) {
+    return this.passwordService.resetPassword(
+      token,
+      password,
+      confirm_password,
+    );
+  }
 }
