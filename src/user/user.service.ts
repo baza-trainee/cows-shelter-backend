@@ -9,7 +9,8 @@ import { JwtService } from '@nestjs/jwt';
 @Injectable()
 export class UserService {
   constructor(
-    @InjectRepository(User) private readonly userRepository: Repository<User>,
+    @InjectRepository(User)
+    public readonly userRepository: Repository<User>,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -35,5 +36,9 @@ export class UserService {
 
   async findOne(email: string) {
     return await this.userRepository.findOne({ where: { email } });
+  }
+
+  async updateUser(id: number, data: any): Promise<any> {
+    return this.userRepository.update(id, data);
   }
 }
