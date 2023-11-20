@@ -11,7 +11,7 @@ export declare class GalleryController {
     } & Gallery>;
     findAll(): Promise<Gallery[]>;
     findOne(id: string): Promise<Gallery>;
-    remove(id: string): Promise<{
+    remove(id: string, imageUrl: string): Promise<{
         success: boolean;
     }>;
     uploadFile(file: Express.Multer.File): any;

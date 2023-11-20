@@ -39,15 +39,18 @@ let GalleryController = class GalleryController {
     findOne(id) {
         return this.galleryService.findOne(+id);
     }
-    remove(id) {
+    remove(id, imageUrl) {
+        const filePath = (0, path_1.join)(process.cwd(), 'uploads/images' + '/' + imageUrl);
+        (0, image_storage_1.removeImage)(filePath);
         return this.galleryService.remove(+id);
     }
     uploadFile(file) {
         const fileName = file?.filename;
         if (!fileName)
             return (0, rxjs_1.of)({ error: 'File must be an image' });
-        const imagePath = (0, path_1.join)('uploads/images' + '/' + fileName);
-        return imagePath;
+        const imageFolderPath = (0, path_1.join)(process.cwd(), 'uploads/images');
+        const imageUrl = (0, path_1.join)(imageFolderPath + '/' + fileName);
+        return imageUrl;
     }
 };
 exports.GalleryController = GalleryController;
@@ -129,12 +132,27 @@ __decorate([
         description: 'internal server error',
     }),
     __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", void 0)
 ], GalleryController.prototype, "remove", null);
 __decorate([
     (0, common_1.Post)('upload'),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'upload image',
+        type: types_1.UploadImageResponse,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'not found',
+        type: types_1.NotFoundResponse,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file', image_storage_1.saveImageToStorage)),
     __param(0, (0, common_1.UploadedFile)()),
     __metadata("design:type", Function),
