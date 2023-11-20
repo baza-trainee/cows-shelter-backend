@@ -13,7 +13,7 @@ const validMimeTypes: ValidMimeType[] = [
 
 export const saveImageToStorage = {
   storage: diskStorage({
-    destination: 'uploads/images',
+    destination: 'tmp/uploads/images',
     filename(req, file, callback) {
       const fileExtension: string = file.originalname.split('.')[1];
       const fileName: string = uuidv4() + '.' + fileExtension;
