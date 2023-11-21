@@ -16,10 +16,11 @@ import { PdfService } from './pdf.service';
 import { CreatePdfDto } from './dto/create-pdf.dto';
 import { UpdatePdfDto } from './dto/update-pdf.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiResponse } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UploadImageResponse } from 'src/types';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
+@ApiTags('PDF')
 @Controller('pdf')
 export class PdfController {
   constructor(
@@ -51,6 +52,7 @@ export class PdfController {
   remove(@Param('id') id: string) {
     return this.pdfService.remove(+id);
   }
+
   @Post('upload')
   @ApiResponse({
     status: 201,
@@ -78,7 +80,7 @@ export class PdfController {
       .then((data) => {
         return {
           statusCode: 200,
-          image_url: data.secure_url,
+          document_url: data.secure_url,
         };
       })
       .catch((err) => {

@@ -1,26 +1,67 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateExcursionDto } from './dto/create-excursion.dto';
 import { UpdateExcursionDto } from './dto/update-excursion.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Excursion } from './entities/excursion.entity';
 
 @Injectable()
 export class ExcursionsService {
-  create(createExcursionDto: CreateExcursionDto) {
-    return 'This action adds a new excursion';
+  constructor(
+    @InjectRepository(Excursion)
+    private readonly excursionsRepository: Repository<Excursion>,
+  ) {}
+  async create(createExcursionDto: CreateExcursionDto) {
+    return await this.excursionsRepository.save(createExcursionDto);
   }
 
-  findAll() {
-    return `This action returns all excursions`;
+  async findAll() {
+    return this.excursionsRepository.find({
+      order: {
+        createdAt: 'DESC',
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} excursion`;
+  async findOne(id: number) {
+    const post = await this.excursionsRepository.findOne({
+      where: { id },
+    });
+    if (!post) throw new NotFoundException('This excursion not found');
+    return post;
   }
 
-  update(id: number, updateExcursionDto: UpdateExcursionDto) {
-    return `This action updates a #${id} excursion`;
+  async update(id: number, updateExcursionDto: UpdateExcursionDto) {
+    const excursion = await this.excursionsRepository.findOne({
+      where: {
+        id,
+      },
+    });
+    if (!excursion) throw new NotFoundException('This excursion not found');
+    return await this.excursionsRepository.update(id, updateExcursionDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} excursion`;
+  async remove(id: number) {
+    const excursion = await this.excursionsRepository.findOne({
+      where: {
+        id,
+      },
+    });
+    if (!excursion) throw new NotFoundException('This excursion not found');
+    await this.excursionsRepository.delete(id);
+    return {
+      success: true,
+    };
+  }
+
+  async findAllWithPagination(page: number, limit: number) {
+    const excursions = await this.excursionsRepository.find({
+      order: {
+        createdAt: 'DESC',
+      },
+      take: limit,
+      skip: (page - 1) * limit,
+    });
+    return excursions;
   }
 }
