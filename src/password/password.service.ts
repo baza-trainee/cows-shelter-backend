@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Password } from './entities/password.entity';
 import { Repository } from 'typeorm';
@@ -11,6 +7,9 @@ import { JwtService } from '@nestjs/jwt';
 import { MailingService } from '../mailing/mailing.service';
 import { UserService } from '../user/user.service';
 import * as argon2 from 'argon2';
+import { ResetPasswordDto } from './dto/reset-password.dto';
+import { ChangePasswordDto } from './dto/change-password.dto';
+import { CreatePasswordDto } from './dto/create-password.dto';
 
 @Injectable()
 export class PasswordService {
@@ -23,14 +22,14 @@ export class PasswordService {
     private readonly mailingService: MailingService,
   ) {}
 
-  async createToken(body: any) {
-    return await this.passwordRepository.save(body);
+  async createRecord(createPasswordDto: CreatePasswordDto) {
+    return await this.passwordRepository.save(createPasswordDto);
   }
 
-  public async sendMail(email: string) {
+  async sendMail(email: string) {
     const token = this.jwtService.sign({ email });
 
-    await this.createToken({
+    await this.createRecord({
       email,
       token,
     });
@@ -65,21 +64,28 @@ export class PasswordService {
     this.passwordRepository.findOne(data);
   }
 
-  public async resetPassword(
-    token: string,
-    password: string,
-    confirm_password: string,
-  ) {
-    if (password !== confirm_password) {
-      throw new BadRequestException('Passwords do not match');
-    }
-    const passwordReset: any = await this.findOne({ token });
+  async resetPassword(resetPasswordDto: ResetPasswordDto) {
+    const passwordResetData: any = await this.findOne({
+      token: resetPasswordDto.token,
+    });
 
-    const user = await this.userService.findOne(passwordReset.email);
+    const user = await this.userService.findOne(passwordResetData.email);
 
     if (!user) throw new NotFoundException('User Not Found');
 
-    const hashedPassword = await argon2.hash(password);
+    const hashedPassword = await argon2.hash(resetPasswordDto.password);
+
+    await this.userService.updateUser(user.id, { password: hashedPassword });
+
+    return { success: true };
+  }
+
+  async changePassword(changePasswordDto: ChangePasswordDto) {
+    const user = await this.userService.findOne(changePasswordDto.email);
+
+    if (!user) throw new NotFoundException('User Not Found');
+
+    const hashedPassword = await argon2.hash(changePasswordDto.password);
 
     await this.userService.updateUser(user.id, { password: hashedPassword });
 

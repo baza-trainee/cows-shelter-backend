@@ -24,12 +24,7 @@ export class PartnersService {
     });
     if (isExist) throw new BadRequestException('Цей Партнер вже існує');
 
-    const newPartner = {
-      name: createPartnerDto.name,
-      logo: createPartnerDto.logo,
-      link: createPartnerDto.link,
-    };
-    return await this.partnerRepository.save(newPartner);
+    return await this.partnerRepository.save(createPartnerDto);
   }
 
   async findAll() {

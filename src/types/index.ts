@@ -12,11 +12,16 @@ export class IUser {
 export class NotFoundResponse {
   @ApiProperty({ default: 404 })
   status_code: number;
-  @ApiProperty({ default: 'item with id=% doesn`t exist' })
+  @ApiProperty()
   message: string;
 }
 
 export class UploadImageResponse {
   @ApiProperty()
   imageUrl: string;
+}
+
+export class FileType {
+  @ApiProperty()
+  file: Express.Multer.File;
 }
