@@ -29,6 +29,7 @@ export class PasswordService {
 
   public async sendMail(email: string) {
     const token = this.jwtService.sign({ email });
+
     await this.createToken({
       email,
       token,
@@ -56,7 +57,7 @@ export class PasswordService {
       });
 
     return {
-      message: 'Check your email',
+      message: 'Перевірте Електронну Пошту',
     };
   }
 

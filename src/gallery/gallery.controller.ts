@@ -110,16 +110,11 @@ export class GalleryController {
     type: UploadImageResponse,
   })
   @ApiResponse({
-    status: 404,
-    description: 'not found',
-    type: NotFoundResponse,
-  })
-  @ApiResponse({
     status: 500,
     description: 'internal server error',
   })
   @UseInterceptors(FileInterceptor('file'))
-  uploadFile(
+  async uploadFile(
     @UploadedFile(
       new ParseFilePipe({
         validators: [
@@ -129,31 +124,20 @@ export class GalleryController {
       }),
     )
     file: Express.Multer.File,
-  ): any {
-    return this.cloudinaryService.uploadImage(file);
+  ): Promise<any> {
+    return await this.cloudinaryService
+      .uploadFile(file, 'images')
+      .then((data) => {
+        return {
+          statusCode: 200,
+          image_url: data.secure_url,
+        };
+      })
+      .catch((err) => {
+        return {
+          statusCode: 400,
+          message: err.message,
+        };
+      });
   }
-
-  // @Post('upload')
-  // @ApiResponse({
-  //   status: 201,
-  //   description: 'upload image',
-  //   type: UploadImageResponse,
-  // })
-  // @ApiResponse({
-  //   status: 404,
-  //   description: 'not found',
-  //   type: NotFoundResponse,
-  // })
-  // @ApiResponse({
-  //   status: 500,
-  //   description: 'internal server error',
-  // })
-  // @UseInterceptors(FileInterceptor('file', saveImageToStorage))
-  // uploadFile(@UploadedFile() file: Express.Multer.File): any {
-  //   const fileName = file?.filename;
-  //   if (!fileName) return of({ error: 'File must be an image' });
-  //   const imageFolderPath = join(process.cwd(), 'uploads/images');
-  //   const imageUrl = join(imageFolderPath + '/' + fileName);
-  //   return imageUrl;
-  // }
 }

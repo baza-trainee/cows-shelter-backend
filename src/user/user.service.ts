@@ -1,10 +1,15 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import * as argon2 from 'argon2';
 import { JwtService } from '@nestjs/jwt';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
@@ -35,10 +40,23 @@ export class UserService {
   }
 
   async findOne(email: string) {
-    return await this.userRepository.findOne({ where: { email } });
+    const user = await this.userRepository.findOne({ where: { email } });
+    if (!user) throw new NotFoundException('user not found');
+    return user;
   }
 
-  async updateUser(id: number, data: any): Promise<any> {
-    return this.userRepository.update(id, data);
+  async updateUser(id: number, updateUserDto: UpdateUserDto): Promise<any> {
+    const user = await this.userRepository.findOne({ where: { id } });
+    if (!user) throw new NotFoundException('user not found');
+    return this.userRepository.update(id, updateUserDto);
+  }
+
+  async updatePassword(
+    email: string,
+    updateUserDto: UpdateUserDto,
+  ): Promise<any> {
+    const user = await this.userRepository.findOne({ where: { email } });
+    if (!user) throw new NotFoundException('user not found');
+    return this.userRepository.update(email, updateUserDto);
   }
 }
