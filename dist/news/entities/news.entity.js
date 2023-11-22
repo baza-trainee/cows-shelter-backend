@@ -30,6 +30,16 @@ __decorate([
     __metadata("design:type", String)
 ], News.prototype, "title_ua", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Subitle in Ua' }),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], News.prototype, "subtitle_en", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Subitle in En' }),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], News.prototype, "subtitle_ua", void 0);
+__decorate([
     (0, swagger_1.ApiProperty)({ description: 'Text in Ua' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)

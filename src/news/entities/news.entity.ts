@@ -19,6 +19,14 @@ export class News {
   @Column()
   title_ua: string;
 
+  @ApiProperty({ description: 'Subitle in Ua' })
+  @Column()
+  subtitle_en: string;
+
+  @ApiProperty({ description: 'Subitle in En' })
+  @Column()
+  subtitle_ua: string;
+
   @ApiProperty({ description: 'Text in Ua' })
   @Column()
   content_en: string;

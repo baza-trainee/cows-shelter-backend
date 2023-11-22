@@ -12,6 +12,14 @@ export class CreateNewsDto {
 
   @ApiProperty()
   @IsString()
+  subtitle_ua: string;
+
+  @ApiProperty()
+  @IsString()
+  subtitle_en: string;
+
+  @ApiProperty()
+  @IsString()
   content_ua: string;
 
   @ApiProperty()
