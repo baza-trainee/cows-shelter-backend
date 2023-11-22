@@ -11,12 +11,9 @@ export class ContactsService {
     @InjectRepository(Contacts)
     private readonly contactsRepository: Repository<Contacts>,
   ) {}
+
   async create(createContactDto: CreateContactDto) {
-    const newContacts = {
-      email: createContactDto.email,
-      phone: createContactDto.phone,
-    };
-    return await this.contactsRepository.save(newContacts);
+    return await this.contactsRepository.save(createContactDto);
   }
 
   async findAll() {

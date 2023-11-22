@@ -13,6 +13,7 @@ export class ExcursionsService {
     private readonly excursionsRepository: Repository<Excursion>,
     private readonly cloudinaryService: CloudinaryService,
   ) {}
+
   async create(createExcursionDto: CreateExcursionDto) {
     return await this.excursionsRepository.save(createExcursionDto);
   }

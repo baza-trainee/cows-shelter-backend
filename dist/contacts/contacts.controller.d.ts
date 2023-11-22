@@ -5,10 +5,7 @@ import { Contacts } from './entities/contact.entity';
 export declare class ContactsController {
     private readonly contactsService;
     constructor(contactsService: ContactsService);
-    create(createContactDto: CreateContactDto): Promise<{
-        email: string;
-        phone: string;
-    } & Contacts>;
+    create(createContactDto: CreateContactDto): Promise<CreateContactDto & Contacts>;
     findAll(): Promise<Contacts[]>;
     update(id: string, updateContactDto: UpdateContactDto): Promise<import("typeorm").UpdateResult>;
     remove(id: string): Promise<{

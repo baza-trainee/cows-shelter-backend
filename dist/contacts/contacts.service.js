@@ -22,11 +22,7 @@ let ContactsService = class ContactsService {
         this.contactsRepository = contactsRepository;
     }
     async create(createContactDto) {
-        const newContacts = {
-            email: createContactDto.email,
-            phone: createContactDto.phone,
-        };
-        return await this.contactsRepository.save(newContacts);
+        return await this.contactsRepository.save(createContactDto);
     }
     async findAll() {
         return this.contactsRepository.find({
