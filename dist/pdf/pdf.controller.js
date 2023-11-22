@@ -49,6 +49,7 @@ let PdfController = class PdfController {
             return {
                 statusCode: 200,
                 document_url: data.secure_url,
+                document_id: data.public_id,
             };
         })
             .catch((err) => {
