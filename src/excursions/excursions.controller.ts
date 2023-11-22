@@ -183,6 +183,7 @@ export class ExcursionsController {
         return {
           statusCode: 200,
           image_url: data.secure_url,
+          image_id: data.public_id,
         };
       })
       .catch((err) => {
