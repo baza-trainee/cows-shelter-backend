@@ -1841,6 +1841,14 @@ window.onload = function() {
               "type": "string",
               "description": "Title in En"
             },
+            "subtitle_en": {
+              "type": "string",
+              "description": "Subitle in Ua"
+            },
+            "subtitle_ua": {
+              "type": "string",
+              "description": "Subitle in En"
+            },
             "content_en": {
               "type": "string",
               "description": "Text in Ua"
@@ -1861,6 +1869,8 @@ window.onload = function() {
           "required": [
             "title_en",
             "title_ua",
+            "subtitle_en",
+            "subtitle_ua",
             "content_en",
             "content_ua",
             "image_url",
@@ -1874,6 +1884,12 @@ window.onload = function() {
               "type": "string"
             },
             "title_en": {
+              "type": "string"
+            },
+            "subtitle_ua": {
+              "type": "string"
+            },
+            "subtitle_en": {
               "type": "string"
             },
             "content_ua": {
@@ -1892,6 +1908,8 @@ window.onload = function() {
           "required": [
             "title_ua",
             "title_en",
+            "subtitle_ua",
+            "subtitle_en",
             "content_ua",
             "content_en",
             "image_url",
@@ -1905,6 +1923,12 @@ window.onload = function() {
               "type": "string"
             },
             "title_en": {
+              "type": "string"
+            },
+            "subtitle_ua": {
+              "type": "string"
+            },
+            "subtitle_en": {
               "type": "string"
             },
             "content_ua": {
