@@ -45,6 +45,11 @@ __decorate([
     __metadata("design:type", String)
 ], News.prototype, "image_url", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Image Id' }),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], News.prototype, "image_id", void 0);
+__decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
 ], News.prototype, "createdAt", void 0);

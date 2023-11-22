@@ -1224,48 +1224,54 @@ window.onload = function() {
           },
           "responses": {
             "201": {
-              "description": ""
+              "description": "create contact",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Contacts"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
             }
-          },
-          "tags": [
-            "Contacts"
-          ]
+          }
         },
         "get": {
           "operationId": "ContactsController_findAll",
           "parameters": [],
           "responses": {
-            "200": {
-              "description": ""
+            "201": {
+              "description": "get all contacts",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Contacts"
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
             }
-          },
-          "tags": [
-            "Contacts"
-          ]
+          }
         }
       },
       "/api/contacts/{id}": {
-        "get": {
-          "operationId": "ContactsController_findOne",
-          "parameters": [
-            {
-              "name": "id",
-              "required": true,
-              "in": "path",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": ""
-            }
-          },
-          "tags": [
-            "Contacts"
-          ]
-        },
         "patch": {
           "operationId": "ContactsController_update",
           "parameters": [
@@ -1289,13 +1295,30 @@ window.onload = function() {
             }
           },
           "responses": {
-            "200": {
-              "description": ""
+            "201": {
+              "description": "update contact",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Contacts"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
             }
-          },
-          "tags": [
-            "Contacts"
-          ]
+          }
         },
         "delete": {
           "operationId": "ContactsController_remove",
@@ -1310,13 +1333,23 @@ window.onload = function() {
             }
           ],
           "responses": {
-            "200": {
-              "description": ""
+            "201": {
+              "description": "delete contact"
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
             }
-          },
-          "tags": [
-            "Contacts"
-          ]
+          }
         }
       },
       "/api/pdf": {
@@ -1335,7 +1368,17 @@ window.onload = function() {
           },
           "responses": {
             "201": {
-              "description": ""
+              "description": "create pdf document",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/PDF"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
             }
           },
           "tags": [
@@ -1346,8 +1389,31 @@ window.onload = function() {
           "operationId": "PdfController_findAll",
           "parameters": [],
           "responses": {
-            "200": {
-              "description": ""
+            "201": {
+              "description": "get all pdfs",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/PDF"
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
             }
           },
           "tags": [
@@ -1369,8 +1435,31 @@ window.onload = function() {
             }
           ],
           "responses": {
-            "200": {
-              "description": ""
+            "201": {
+              "description": "get single pdf",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/PDF"
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
             }
           },
           "tags": [
@@ -1400,8 +1489,28 @@ window.onload = function() {
             }
           },
           "responses": {
-            "200": {
-              "description": ""
+            "201": {
+              "description": "update pdf",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/PDF"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
             }
           },
           "tags": [
@@ -1421,8 +1530,21 @@ window.onload = function() {
             }
           ],
           "responses": {
-            "200": {
-              "description": ""
+            "201": {
+              "description": "delete pdf"
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
             }
           },
           "tags": [
@@ -1436,7 +1558,7 @@ window.onload = function() {
           "parameters": [],
           "responses": {
             "201": {
-              "description": "upload image",
+              "description": "upload pdf",
               "content": {
                 "application/json": {
                   "schema": {
@@ -1721,6 +1843,10 @@ window.onload = function() {
             "image_url": {
               "type": "string",
               "description": "Image Url"
+            },
+            "image_id": {
+              "type": "string",
+              "description": "Image Id"
             }
           },
           "required": [
@@ -1728,7 +1854,8 @@ window.onload = function() {
             "title_ua",
             "content_en",
             "content_ua",
-            "image_url"
+            "image_url",
+            "image_id"
           ]
         },
         "CreateNewsDto": {
@@ -1748,6 +1875,9 @@ window.onload = function() {
             },
             "image_url": {
               "type": "string"
+            },
+            "image_id": {
+              "type": "string"
             }
           },
           "required": [
@@ -1755,7 +1885,8 @@ window.onload = function() {
             "title_en",
             "content_ua",
             "content_en",
-            "image_url"
+            "image_url",
+            "image_id"
           ]
         },
         "UpdateNewsDto": {
@@ -1774,6 +1905,9 @@ window.onload = function() {
               "type": "string"
             },
             "image_url": {
+              "type": "string"
+            },
+            "image_id": {
               "type": "string"
             }
           }
@@ -1947,7 +2081,35 @@ window.onload = function() {
         },
         "CreateContactDto": {
           "type": "object",
-          "properties": {}
+          "properties": {
+            "email": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "email",
+            "phone"
+          ]
+        },
+        "Contacts": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "description": "New email"
+            },
+            "phone": {
+              "type": "string",
+              "description": "New Phone"
+            }
+          },
+          "required": [
+            "email",
+            "phone"
+          ]
         },
         "UpdateContactDto": {
           "type": "object",
@@ -1955,7 +2117,35 @@ window.onload = function() {
         },
         "CreatePdfDto": {
           "type": "object",
-          "properties": {}
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "document_url": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "title",
+            "document_url"
+          ]
+        },
+        "PDF": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "Title of the document"
+            },
+            "document_url": {
+              "type": "string",
+              "description": "Url of the uploaded document"
+            }
+          },
+          "required": [
+            "title",
+            "document_url"
+          ]
         },
         "UpdatePdfDto": {
           "type": "object",

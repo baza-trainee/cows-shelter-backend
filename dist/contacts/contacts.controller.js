@@ -18,6 +18,8 @@ const contacts_service_1 = require("./contacts.service");
 const create_contact_dto_1 = require("./dto/create-contact.dto");
 const update_contact_dto_1 = require("./dto/update-contact.dto");
 const swagger_1 = require("@nestjs/swagger");
+const contact_entity_1 = require("./entities/contact.entity");
+const types_1 = require("../types");
 let ContactsController = class ContactsController {
     constructor(contactsService) {
         this.contactsService = contactsService;
@@ -27,9 +29,6 @@ let ContactsController = class ContactsController {
     }
     findAll() {
         return this.contactsService.findAll();
-    }
-    findOne(id) {
-        return this.contactsService.findOne(+id);
     }
     update(id, updateContactDto) {
         return this.contactsService.update(+id, updateContactDto);
@@ -41,6 +40,18 @@ let ContactsController = class ContactsController {
 exports.ContactsController = ContactsController;
 __decorate([
     (0, common_1.Post)(),
+    (0, swagger_1.ApiBody)({
+        type: create_contact_dto_1.CreateContactDto,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'create contact',
+        type: contact_entity_1.Contacts,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_contact_dto_1.CreateContactDto]),
@@ -48,19 +59,43 @@ __decorate([
 ], ContactsController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'get all contacts',
+        type: [contact_entity_1.Contacts],
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'not found',
+        type: types_1.NotFoundResponse,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], ContactsController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
-], ContactsController.prototype, "findOne", null);
-__decorate([
     (0, common_1.Patch)(':id'),
+    (0, swagger_1.ApiBody)({
+        type: update_contact_dto_1.UpdateContactDto,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'update contact',
+        type: contact_entity_1.Contacts,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'not found',
+        type: types_1.NotFoundResponse,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -69,13 +104,25 @@ __decorate([
 ], ContactsController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'delete contact',
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'not found',
+        type: types_1.NotFoundResponse,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], ContactsController.prototype, "remove", null);
 exports.ContactsController = ContactsController = __decorate([
-    (0, swagger_1.ApiTags)('Contacts'),
     (0, common_1.Controller)('contacts'),
     __metadata("design:paramtypes", [contacts_service_1.ContactsService])
 ], ContactsController);

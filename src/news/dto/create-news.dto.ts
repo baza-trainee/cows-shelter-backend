@@ -21,4 +21,8 @@ export class CreateNewsDto {
   @ApiProperty()
   @IsUrl()
   image_url: string;
+
+  @ApiProperty()
+  @IsUrl()
+  image_id: string;
 }

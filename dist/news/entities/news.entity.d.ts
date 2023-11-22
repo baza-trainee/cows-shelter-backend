@@ -5,5 +5,6 @@ export declare class News {
     content_en: string;
     content_ua: string;
     image_url: string;
+    image_id: string;
     createdAt: Date;
 }

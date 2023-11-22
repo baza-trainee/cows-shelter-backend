@@ -31,6 +31,10 @@ export class News {
   @Column()
   image_url: string;
 
+  @ApiProperty({ description: 'Image Id' })
+  @Column()
+  image_id: string;
+
   @CreateDateColumn()
   createdAt: Date;
 }
