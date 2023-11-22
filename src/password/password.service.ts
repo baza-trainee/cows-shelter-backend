@@ -89,6 +89,6 @@ export class PasswordService {
 
     await this.userService.updateUser(user.id, { password: hashedPassword });
 
-    return { success: true };
+    return user;
   }
 }
