@@ -33,4 +33,8 @@ export class CreateExcursionDto {
   @ApiProperty()
   @IsUrl()
   image_url: string;
+
+  @ApiProperty()
+  @IsString()
+  image_id: string;
 }

@@ -1,9 +1,11 @@
 import { CreateGalleryDto } from './dto/create-gallery.dto';
 import { Repository } from 'typeorm';
 import { Gallery } from './entities/gallery.entity';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 export declare class GalleryService {
     private readonly galleryRepository;
-    constructor(galleryRepository: Repository<Gallery>);
+    private readonly cloudinaryService;
+    constructor(galleryRepository: Repository<Gallery>, cloudinaryService: CloudinaryService);
     create(createGalleryDto: CreateGalleryDto): Promise<{
         image_url: string;
     } & Gallery>;

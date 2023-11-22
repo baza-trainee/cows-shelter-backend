@@ -1749,12 +1749,16 @@ window.onload = function() {
             },
             "link": {
               "type": "string"
+            },
+            "image_id": {
+              "type": "string"
             }
           },
           "required": [
             "name",
             "logo",
-            "link"
+            "link",
+            "image_id"
           ]
         },
         "Partner": {
@@ -1771,12 +1775,17 @@ window.onload = function() {
             "link": {
               "type": "string",
               "description": "Link to partner`s website"
+            },
+            "image_id": {
+              "type": "string",
+              "description": "cloudinary public id of the image"
             }
           },
           "required": [
             "name",
             "logo",
-            "link"
+            "link",
+            "image_id"
           ]
         },
         "NotFoundResponse": {
@@ -1946,6 +1955,10 @@ window.onload = function() {
             "image_url": {
               "type": "string",
               "description": "Image Url"
+            },
+            "image_id": {
+              "type": "string",
+              "description": "cloudinary public id for image"
             }
           },
           "required": [
@@ -1956,7 +1969,8 @@ window.onload = function() {
             "amount_of_persons",
             "time_from",
             "time_to",
-            "image_url"
+            "image_url",
+            "image_id"
           ]
         },
         "CreateExcursionDto": {
@@ -1985,6 +1999,9 @@ window.onload = function() {
             },
             "image_url": {
               "type": "string"
+            },
+            "image_id": {
+              "type": "string"
             }
           },
           "required": [
@@ -1995,7 +2012,8 @@ window.onload = function() {
             "amount_of_persons",
             "time_from",
             "time_to",
-            "image_url"
+            "image_url",
+            "image_id"
           ]
         },
         "UpdateExcursionDto": {
@@ -2008,10 +2026,15 @@ window.onload = function() {
             "image_url": {
               "type": "string",
               "description": "Url of the image"
+            },
+            "image_id": {
+              "type": "string",
+              "description": "cloudinary public id of the image"
             }
           },
           "required": [
-            "image_url"
+            "image_url",
+            "image_id"
           ]
         },
         "CreateGalleryDto": {
@@ -2019,10 +2042,14 @@ window.onload = function() {
           "properties": {
             "image_url": {
               "type": "string"
+            },
+            "image_id": {
+              "type": "string"
             }
           },
           "required": [
-            "image_url"
+            "image_url",
+            "image_id"
           ]
         },
         "CreateReviewDto": {

@@ -60,6 +60,11 @@ __decorate([
     __metadata("design:type", String)
 ], Excursion.prototype, "image_url", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'cloudinary public id for image' }),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Excursion.prototype, "image_id", void 0);
+__decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
 ], Excursion.prototype, "createdAt", void 0);

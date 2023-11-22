@@ -3,12 +3,14 @@ import { CreateGalleryDto } from './dto/create-gallery.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Gallery } from './entities/gallery.entity';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Injectable()
 export class GalleryService {
   constructor(
     @InjectRepository(Gallery)
     private readonly galleryRepository: Repository<Gallery>,
+    private readonly cloudinaryService: CloudinaryService,
   ) {}
 
   async create(createGalleryDto: CreateGalleryDto) {
@@ -40,6 +42,7 @@ export class GalleryService {
       where: { id },
     });
     if (!image) throw new NotFoundException('image not found');
+    await this.cloudinaryService.deleteFile(image.image_id);
     await this.galleryRepository.delete(id);
     return { success: true };
   }

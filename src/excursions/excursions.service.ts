@@ -4,12 +4,14 @@ import { UpdateExcursionDto } from './dto/update-excursion.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Excursion } from './entities/excursion.entity';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Injectable()
 export class ExcursionsService {
   constructor(
     @InjectRepository(Excursion)
     private readonly excursionsRepository: Repository<Excursion>,
+    private readonly cloudinaryService: CloudinaryService,
   ) {}
   async create(createExcursionDto: CreateExcursionDto) {
     return await this.excursionsRepository.save(createExcursionDto);
@@ -48,6 +50,7 @@ export class ExcursionsService {
       },
     });
     if (!excursion) throw new NotFoundException('This excursion not found');
+    await this.cloudinaryService.deleteFile(excursion.image_id);
     await this.excursionsRepository.delete(id);
     return {
       success: true,

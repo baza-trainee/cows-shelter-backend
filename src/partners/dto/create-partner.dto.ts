@@ -13,4 +13,8 @@ export class CreatePartnerDto {
   @ApiProperty()
   @IsUrl(undefined, { message: 'URL is not valid.' })
   link: string;
+
+  @ApiProperty()
+  @IsString()
+  image_id: string;
 }

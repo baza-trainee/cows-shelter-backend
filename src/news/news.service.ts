@@ -4,12 +4,14 @@ import { UpdateNewsDto } from './dto/update-news.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { News } from './entities/news.entity';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Injectable()
 export class NewsService {
   constructor(
     @InjectRepository(News)
     private readonly newsRepository: Repository<News>,
+    private readonly cloudinaryService: CloudinaryService,
   ) {}
 
   async create(createNewsDto: CreateNewsDto) {
@@ -45,6 +47,7 @@ export class NewsService {
       where: { id },
     });
     if (!post) throw new NotFoundException('This post not found');
+    await this.cloudinaryService.deleteFile(post.image_id);
     await this.newsRepository.delete(id);
     return { success: true };
   }

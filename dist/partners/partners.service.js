@@ -17,9 +17,11 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("typeorm");
 const partner_entity_1 = require("./entities/partner.entity");
 const typeorm_2 = require("@nestjs/typeorm");
+const cloudinary_service_1 = require("../cloudinary/cloudinary.service");
 let PartnersService = class PartnersService {
-    constructor(partnerRepository) {
+    constructor(partnerRepository, cloudinaryService) {
         this.partnerRepository = partnerRepository;
+        this.cloudinaryService = cloudinaryService;
     }
     async create(createPartnerDto) {
         const isExist = await this.partnerRepository.findOne({
@@ -48,6 +50,7 @@ let PartnersService = class PartnersService {
         });
         if (!partner)
             throw new common_1.NotFoundException('This Partner not found');
+        await this.cloudinaryService.deleteFile(partner.image_id);
         await this.partnerRepository.delete(id);
         return { success: true };
     }
@@ -56,6 +59,7 @@ exports.PartnersService = PartnersService;
 exports.PartnersService = PartnersService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_2.InjectRepository)(partner_entity_1.Partner)),
-    __metadata("design:paramtypes", [typeorm_1.Repository])
+    __metadata("design:paramtypes", [typeorm_1.Repository,
+        cloudinary_service_1.CloudinaryService])
 ], PartnersService);
 //# sourceMappingURL=partners.service.js.map

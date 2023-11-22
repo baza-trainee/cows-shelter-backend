@@ -25,6 +25,11 @@ __decorate([
     __metadata("design:type", String)
 ], Gallery.prototype, "image_url", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'cloudinary public id of the image' }),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Gallery.prototype, "image_id", void 0);
+__decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
 ], Gallery.prototype, "createdAt", void 0);

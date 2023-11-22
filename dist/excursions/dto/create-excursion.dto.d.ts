@@ -7,4 +7,5 @@ export declare class CreateExcursionDto {
     time_from: string;
     time_to: string;
     image_url: string;
+    image_id: string;
 }

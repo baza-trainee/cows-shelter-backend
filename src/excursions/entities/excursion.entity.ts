@@ -43,6 +43,10 @@ export class Excursion {
   @Column()
   image_url: string;
 
+  @ApiProperty({ description: 'cloudinary public id for image' })
+  @Column()
+  image_id: string;
+
   @CreateDateColumn()
   createdAt: Date;
 }
