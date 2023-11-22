@@ -3,5 +3,6 @@ export declare class Partner {
     name: string;
     logo: string;
     link: string;
+    image_id: string;
     createdAt: Date;
 }

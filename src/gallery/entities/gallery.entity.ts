@@ -15,6 +15,10 @@ export class Gallery {
   @Column()
   image_url: string;
 
+  @ApiProperty({ description: 'cloudinary public id of the image' })
+  @Column()
+  image_id: string;
+
   @CreateDateColumn()
   createdAt: Date;
 }

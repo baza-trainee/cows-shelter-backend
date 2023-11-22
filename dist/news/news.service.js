@@ -17,9 +17,11 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const news_entity_1 = require("./entities/news.entity");
+const cloudinary_service_1 = require("../cloudinary/cloudinary.service");
 let NewsService = class NewsService {
-    constructor(newsRepository) {
+    constructor(newsRepository, cloudinaryService) {
         this.newsRepository = newsRepository;
+        this.cloudinaryService = cloudinaryService;
     }
     async create(createNewsDto) {
         return await this.newsRepository.save(createNewsDto);
@@ -53,6 +55,7 @@ let NewsService = class NewsService {
         });
         if (!post)
             throw new common_1.NotFoundException('This post not found');
+        await this.cloudinaryService.deleteFile(post.image_id);
         await this.newsRepository.delete(id);
         return { success: true };
     }
@@ -71,6 +74,7 @@ exports.NewsService = NewsService;
 exports.NewsService = NewsService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(news_entity_1.News)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        cloudinary_service_1.CloudinaryService])
 ], NewsService);
 //# sourceMappingURL=news.service.js.map

@@ -35,6 +35,11 @@ __decorate([
     __metadata("design:type", String)
 ], Partner.prototype, "link", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'cloudinary public id of the image' }),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Partner.prototype, "image_id", void 0);
+__decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
 ], Partner.prototype, "createdAt", void 0);

@@ -17,9 +17,11 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const excursion_entity_1 = require("./entities/excursion.entity");
+const cloudinary_service_1 = require("../cloudinary/cloudinary.service");
 let ExcursionsService = class ExcursionsService {
-    constructor(excursionsRepository) {
+    constructor(excursionsRepository, cloudinaryService) {
         this.excursionsRepository = excursionsRepository;
+        this.cloudinaryService = cloudinaryService;
     }
     async create(createExcursionDto) {
         return await this.excursionsRepository.save(createExcursionDto);
@@ -57,6 +59,7 @@ let ExcursionsService = class ExcursionsService {
         });
         if (!excursion)
             throw new common_1.NotFoundException('This excursion not found');
+        await this.cloudinaryService.deleteFile(excursion.image_id);
         await this.excursionsRepository.delete(id);
         return {
             success: true,
@@ -77,6 +80,7 @@ exports.ExcursionsService = ExcursionsService;
 exports.ExcursionsService = ExcursionsService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(excursion_entity_1.Excursion)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        cloudinary_service_1.CloudinaryService])
 ], ExcursionsService);
 //# sourceMappingURL=excursions.service.js.map

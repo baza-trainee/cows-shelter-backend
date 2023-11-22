@@ -8,5 +8,6 @@ export declare class Excursion {
     time_from: string;
     time_to: string;
     image_url: string;
+    image_id: string;
     createdAt: Date;
 }
