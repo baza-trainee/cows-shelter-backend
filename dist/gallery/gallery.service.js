@@ -24,10 +24,7 @@ let GalleryService = class GalleryService {
         this.cloudinaryService = cloudinaryService;
     }
     async create(createGalleryDto) {
-        const newImage = {
-            image_url: createGalleryDto.image_url,
-        };
-        return await this.galleryRepository.save(newImage);
+        return await this.galleryRepository.save(createGalleryDto);
     }
     async findAll() {
         const images = await this.galleryRepository.find({

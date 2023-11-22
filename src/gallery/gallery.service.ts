@@ -14,10 +14,7 @@ export class GalleryService {
   ) {}
 
   async create(createGalleryDto: CreateGalleryDto) {
-    const newImage = {
-      image_url: createGalleryDto.image_url,
-    };
-    return await this.galleryRepository.save(newImage);
+    return await this.galleryRepository.save(createGalleryDto);
   }
 
   async findAll() {

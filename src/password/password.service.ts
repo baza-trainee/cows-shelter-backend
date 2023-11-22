@@ -34,7 +34,7 @@ export class PasswordService {
       token,
     });
 
-    const url = `http://localhost:3000/reset/${token}`;
+    const url = `https://cows-shelter-frontend.vercel.app/reset/${token}`;
 
     await this.mailingService.setTransport();
     this.mailerService
