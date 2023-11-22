@@ -40,4 +40,9 @@ __decorate([
     (0, class_validator_1.IsUrl)(),
     __metadata("design:type", String)
 ], CreateNewsDto.prototype, "image_url", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUrl)(),
+    __metadata("design:type", String)
+], CreateNewsDto.prototype, "image_id", void 0);
 //# sourceMappingURL=create-news.dto.js.map

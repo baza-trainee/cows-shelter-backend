@@ -22,13 +22,7 @@ let ReviewsService = class ReviewsService {
         this.reviewRepository = reviewRepository;
     }
     async create(createReviewDto) {
-        const newReview = {
-            name_ua: createReviewDto.name_ua,
-            name_en: createReviewDto.name_en,
-            text_ua: createReviewDto.text_ua,
-            text_en: createReviewDto.text_en,
-        };
-        return await this.reviewRepository.save(newReview);
+        return await this.reviewRepository.save(createReviewDto);
     }
     async findAll() {
         return this.reviewRepository.find({

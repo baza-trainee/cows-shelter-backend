@@ -4,4 +4,5 @@ export declare class CreateNewsDto {
     content_ua: string;
     content_en: string;
     image_url: string;
+    image_id: string;
 }
