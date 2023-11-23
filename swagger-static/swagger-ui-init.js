@@ -2174,11 +2174,15 @@ window.onload = function() {
             },
             "document_url": {
               "type": "string"
+            },
+            "document_id": {
+              "type": "string"
             }
           },
           "required": [
             "title",
-            "document_url"
+            "document_url",
+            "document_id"
           ]
         },
         "PDF": {

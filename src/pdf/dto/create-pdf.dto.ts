@@ -9,4 +9,8 @@ export class CreatePdfDto {
   @ApiProperty()
   @IsUrl()
   document_url: string;
+
+  @ApiProperty()
+  @IsUrl()
+  document_id: string;
 }
