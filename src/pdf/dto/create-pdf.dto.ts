@@ -11,6 +11,6 @@ export class CreatePdfDto {
   document_url: string;
 
   @ApiProperty()
-  @IsUrl()
+  @IsString()
   document_id: string;
 }
