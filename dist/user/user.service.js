@@ -42,7 +42,9 @@ let UserService = class UserService {
     }
     async findOne(email) {
         const user = await this.userRepository.findOne({ where: { email } });
-        throw new common_1.HttpException('Немає акаунту з цією адресою', common_1.HttpStatus.NOT_FOUND);
+        if (!user) {
+            throw new common_1.HttpException('Немає акаунту з цією адресою', common_1.HttpStatus.NOT_FOUND);
+        }
         return user;
     }
     async updateUser(id, updateUserDto) {

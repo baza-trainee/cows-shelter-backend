@@ -40,10 +40,12 @@ export class UserService {
 
   async findOne(email: string) {
     const user = await this.userRepository.findOne({ where: { email } });
-    throw new HttpException(
-      'Немає акаунту з цією адресою',
-      HttpStatus.NOT_FOUND,
-    );
+    if (!user) {
+      throw new HttpException(
+        'Немає акаунту з цією адресою',
+        HttpStatus.NOT_FOUND,
+      );
+    }
     return user;
   }
 
