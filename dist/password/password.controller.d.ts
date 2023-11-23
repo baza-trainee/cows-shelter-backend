@@ -7,10 +7,6 @@ export declare class PasswordController {
     forgotPassword(email: string): Promise<{
         message: string;
     }>;
-    resetPassword(resetPasswordDto: ResetPasswordDto): Promise<{
-        success: boolean;
-    }>;
-    changePassword(changePasswordDto: ChangePasswordDto): Promise<{
-        success: boolean;
-    }>;
+    resetPassword(resetPasswordDto: ResetPasswordDto): Promise<import("../user/entities/user.entity").User>;
+    changePassword(changePasswordDto: ChangePasswordDto): Promise<import("../user/entities/user.entity").User>;
 }

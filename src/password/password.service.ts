@@ -60,16 +60,14 @@ export class PasswordService {
     };
   }
 
-  async findOne(data: any) {
-    this.passwordRepository.findOne(data);
-  }
-
   async resetPassword(resetPasswordDto: ResetPasswordDto) {
-    const passwordResetData: any = await this.findOne({
-      token: resetPasswordDto.token,
+    const data: any = await this.passwordRepository.findOne({
+      where: {
+        token: resetPasswordDto.token,
+      },
     });
 
-    const user = await this.userService.findOne(passwordResetData.email);
+    const user = await this.userService.findOne(data.email);
 
     if (!user) throw new NotFoundException('User Not Found');
 
