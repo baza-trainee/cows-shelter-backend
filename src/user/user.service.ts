@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
@@ -27,7 +23,10 @@ export class UserService {
     });
 
     if (existingUser) {
-      throw new BadRequestException('User with this email already exists');
+      throw new HttpException(
+        'Користувач з цією адресою вже існує',
+        HttpStatus.BAD_REQUEST,
+      );
     }
     const user = await this.userRepository.save({
       email: createUserDto.email,
@@ -41,13 +40,20 @@ export class UserService {
 
   async findOne(email: string) {
     const user = await this.userRepository.findOne({ where: { email } });
-    if (!user) throw new NotFoundException('user not found');
+    throw new HttpException(
+      'Немає акаунту з цією адресою',
+      HttpStatus.NOT_FOUND,
+    );
     return user;
   }
 
   async updateUser(id: number, updateUserDto: UpdateUserDto): Promise<any> {
     const user = await this.userRepository.findOne({ where: { id } });
-    if (!user) throw new NotFoundException('user not found');
+    if (!user)
+      throw new HttpException(
+        'Немає акаунту з цією адресою',
+        HttpStatus.NOT_FOUND,
+      );
     return this.userRepository.update(id, updateUserDto);
   }
 
@@ -56,7 +62,11 @@ export class UserService {
     updateUserDto: UpdateUserDto,
   ): Promise<any> {
     const user = await this.userRepository.findOne({ where: { email } });
-    if (!user) throw new NotFoundException('user not found');
+    if (!user)
+      throw new HttpException(
+        'Немає акаунту з цією адресою',
+        HttpStatus.NOT_FOUND,
+      );
     return this.userRepository.update(email, updateUserDto);
   }
 }

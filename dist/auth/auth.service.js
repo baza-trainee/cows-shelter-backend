@@ -25,7 +25,7 @@ let AuthService = class AuthService {
         if (user && isPasswordsMatch) {
             return user;
         }
-        throw new common_1.BadRequestException({ message: 'Email or password is invalid' });
+        throw new common_1.HttpException('Невірний логін або пароль. Спробуйте ще', common_1.HttpStatus.BAD_REQUEST);
     }
     async login(user) {
         const { id, email } = user;

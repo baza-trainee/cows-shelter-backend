@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import * as argon2 from 'argon2';
 import { JwtService } from '@nestjs/jwt';
@@ -19,7 +19,10 @@ export class AuthService {
       return user;
     }
 
-    throw new BadRequestException({ message: 'Email or password is invalid' });
+    throw new HttpException(
+      'Невірний логін або пароль. Спробуйте ще',
+      HttpStatus.BAD_REQUEST,
+    );
   }
 
   async login(user: IUser) {
