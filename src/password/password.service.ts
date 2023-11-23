@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Password } from './entities/password.entity';
 import { Repository } from 'typeorm';
@@ -69,7 +69,12 @@ export class PasswordService {
 
     const user = await this.userService.findOne(data.email);
 
-    if (!user) throw new NotFoundException('User Not Found');
+    if (!user) {
+      throw new HttpException(
+        'Немає акаунту з цією адресою',
+        HttpStatus.NOT_FOUND,
+      );
+    }
 
     const hashedPassword = await argon2.hash(resetPasswordDto.password);
 
@@ -81,7 +86,11 @@ export class PasswordService {
   async changePassword(changePasswordDto: ChangePasswordDto) {
     const user = await this.userService.findOne(changePasswordDto.email);
 
-    if (!user) throw new NotFoundException('User Not Found');
+    if (!user)
+      throw new HttpException(
+        'Немає акаунту з цією адресою',
+        HttpStatus.NOT_FOUND,
+      );
 
     const hashedPassword = await argon2.hash(changePasswordDto.password);
 
