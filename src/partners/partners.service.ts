@@ -8,12 +8,14 @@ import { UpdatePartnerDto } from './dto/update-partner.dto';
 import { Repository } from 'typeorm';
 import { Partner } from './entities/partner.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Injectable()
 export class PartnersService {
   constructor(
     @InjectRepository(Partner)
     private readonly partnerRepository: Repository<Partner>,
+    private readonly cloudinaryService: CloudinaryService,
   ) {}
 
   async create(createPartnerDto: CreatePartnerDto) {
@@ -24,12 +26,7 @@ export class PartnersService {
     });
     if (isExist) throw new BadRequestException('Цей Партнер вже існує');
 
-    const newPartner = {
-      name: createPartnerDto.name,
-      logo: createPartnerDto.logo,
-      link: createPartnerDto.link,
-    };
-    return await this.partnerRepository.save(newPartner);
+    return await this.partnerRepository.save(createPartnerDto);
   }
 
   async findAll() {
@@ -49,6 +46,7 @@ export class PartnersService {
       where: { id },
     });
     if (!partner) throw new NotFoundException('This Partner not found');
+    await this.cloudinaryService.deleteFile(partner.image_id);
     await this.partnerRepository.delete(id);
     return { success: true };
   }

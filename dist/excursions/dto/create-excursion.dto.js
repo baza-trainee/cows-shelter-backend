@@ -10,36 +10,54 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateExcursionDto = void 0;
+const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateExcursionDto {
 }
 exports.CreateExcursionDto = CreateExcursionDto;
 __decorate([
+    (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateExcursionDto.prototype, "title_ua", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateExcursionDto.prototype, "title_en", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateExcursionDto.prototype, "description_ua", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateExcursionDto.prototype, "description_en", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateExcursionDto.prototype, "amount", void 0);
+], CreateExcursionDto.prototype, "amount_of_persons", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateExcursionDto.prototype, "duration", void 0);
+], CreateExcursionDto.prototype, "time_from", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateExcursionDto.prototype, "time_to", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsUrl)(),
     __metadata("design:type", String)
 ], CreateExcursionDto.prototype, "image_url", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateExcursionDto.prototype, "image_id", void 0);
 //# sourceMappingURL=create-excursion.dto.js.map

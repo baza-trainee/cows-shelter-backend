@@ -12,6 +12,7 @@ const partners_service_1 = require("./partners.service");
 const partners_controller_1 = require("./partners.controller");
 const typeorm_1 = require("@nestjs/typeorm");
 const partner_entity_1 = require("./entities/partner.entity");
+const cloudinary_service_1 = require("../cloudinary/cloudinary.service");
 let PartnersModule = class PartnersModule {
 };
 exports.PartnersModule = PartnersModule;
@@ -19,7 +20,7 @@ exports.PartnersModule = PartnersModule = __decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([partner_entity_1.Partner])],
         controllers: [partners_controller_1.PartnersController],
-        providers: [partners_service_1.PartnersService],
+        providers: [partners_service_1.PartnersService, cloudinary_service_1.CloudinaryService],
     })
 ], PartnersModule);
 //# sourceMappingURL=partners.module.js.map

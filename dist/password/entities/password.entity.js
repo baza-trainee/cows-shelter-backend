@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Password = void 0;
+const swagger_1 = require("@nestjs/swagger");
 const typeorm_1 = require("typeorm");
 let Password = class Password {
 };
@@ -19,10 +20,12 @@ __decorate([
     __metadata("design:type", Number)
 ], Password.prototype, "id", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'email' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Password.prototype, "email", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'token' }),
     (0, typeorm_1.Column)({ unique: true }),
     __metadata("design:type", String)
 ], Password.prototype, "token", void 0);

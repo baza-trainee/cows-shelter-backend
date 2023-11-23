@@ -1,17 +1,12 @@
 import { PasswordService } from './password.service';
-import { JwtService } from '@nestjs/jwt';
-import { MailingService } from '../mailing/mailing.service';
-import { MailerService } from '@nestjs-modules/mailer';
+import { ResetPasswordDto } from './dto/reset-password.dto';
+import { ChangePasswordDto } from './dto/change-password.dto';
 export declare class PasswordController {
     private readonly passwordService;
-    private readonly jwtService;
-    private readonly mailerService;
-    private readonly mailingService;
-    constructor(passwordService: PasswordService, jwtService: JwtService, mailerService: MailerService, mailingService: MailingService);
+    constructor(passwordService: PasswordService);
     forgotPassword(email: string): Promise<{
         message: string;
     }>;
-    resetPassword(token: string, password: string, confirm_password: string): Promise<{
-        success: boolean;
-    }>;
+    resetPassword(resetPasswordDto: ResetPasswordDto): Promise<import("../user/entities/user.entity").User>;
+    changePassword(changePasswordDto: ChangePasswordDto): Promise<import("../user/entities/user.entity").User>;
 }

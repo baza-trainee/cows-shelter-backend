@@ -104,6 +104,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ReviewsController.prototype, "remove", null);
 exports.ReviewsController = ReviewsController = __decorate([
+    (0, swagger_1.ApiTags)('Reviews'),
     (0, common_1.Controller)('reviews'),
     __metadata("design:paramtypes", [reviews_service_1.ReviewsService])
 ], ReviewsController);

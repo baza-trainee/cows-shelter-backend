@@ -6,17 +6,28 @@ import {
   Patch,
   Param,
   Delete,
+  FileTypeValidator,
+  MaxFileSizeValidator,
+  ParseFilePipe,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { PartnersService } from './partners.service';
 import { CreatePartnerDto } from './dto/create-partner.dto';
 import { UpdatePartnerDto } from './dto/update-partner.dto';
-import { ApiBody, ApiResponse } from '@nestjs/swagger';
+import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Partner } from './entities/partner.entity';
-import { NotFoundResponse } from '../types';
+import { FileType, NotFoundResponse, UploadImageResponse } from '../types';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
+import { FileInterceptor } from '@nestjs/platform-express';
 
+@ApiTags('Partners')
 @Controller('partners')
 export class PartnersController {
-  constructor(private readonly partnersService: PartnersService) {}
+  constructor(
+    private readonly partnersService: PartnersService,
+    private readonly cloudinaryService: CloudinaryService,
+  ) {}
 
   @Post()
   @ApiBody({ type: CreatePartnerDto })
@@ -80,5 +91,47 @@ export class PartnersController {
   })
   remove(@Param('id') id: string) {
     return this.partnersService.remove(+id);
+  }
+
+  @Post('upload')
+  @ApiBody({
+    type: FileType,
+  })
+  @ApiResponse({
+    status: 201,
+    description: 'upload image',
+    type: UploadImageResponse,
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'internal server error',
+  })
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadFile(
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new MaxFileSizeValidator({ maxSize: 1024 * 1024 }), //1mb
+          new FileTypeValidator({ fileType: '.(png|jpg|jpeg|webp)' }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
+  ): Promise<any> {
+    return await this.cloudinaryService
+      .uploadFile(file, 'logo')
+      .then((data) => {
+        return {
+          statusCode: 200,
+          image_url: data.secure_url,
+          image_id: data.public_id,
+        };
+      })
+      .catch((err) => {
+        return {
+          statusCode: 400,
+          message: err.message,
+        };
+      });
   }
 }

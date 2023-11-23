@@ -12,6 +12,7 @@ const pdf_service_1 = require("./pdf.service");
 const pdf_controller_1 = require("./pdf.controller");
 const pdf_entity_1 = require("./entities/pdf.entity");
 const typeorm_1 = require("@nestjs/typeorm");
+const cloudinary_service_1 = require("../cloudinary/cloudinary.service");
 let PdfModule = class PdfModule {
 };
 exports.PdfModule = PdfModule;
@@ -19,7 +20,7 @@ exports.PdfModule = PdfModule = __decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([pdf_entity_1.PDF])],
         controllers: [pdf_controller_1.PdfController],
-        providers: [pdf_service_1.PdfService],
+        providers: [pdf_service_1.PdfService, cloudinary_service_1.CloudinaryService],
     })
 ], PdfModule);
 //# sourceMappingURL=pdf.module.js.map

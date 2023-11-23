@@ -31,7 +31,7 @@ let UserService = class UserService {
             },
         });
         if (existingUser) {
-            throw new common_1.BadRequestException('User with this email already exists');
+            throw new common_1.HttpException('Користувач з цією адресою вже існує', common_1.HttpStatus.BAD_REQUEST);
         }
         const user = await this.userRepository.save({
             email: createUserDto.email,
@@ -42,20 +42,19 @@ let UserService = class UserService {
     }
     async findOne(email) {
         const user = await this.userRepository.findOne({ where: { email } });
-        if (!user)
-            throw new common_1.NotFoundException('user not found');
+        throw new common_1.HttpException('Немає акаунту з цією адресою', common_1.HttpStatus.NOT_FOUND);
         return user;
     }
     async updateUser(id, updateUserDto) {
         const user = await this.userRepository.findOne({ where: { id } });
         if (!user)
-            throw new common_1.NotFoundException('user not found');
+            throw new common_1.HttpException('Немає акаунту з цією адресою', common_1.HttpStatus.NOT_FOUND);
         return this.userRepository.update(id, updateUserDto);
     }
     async updatePassword(email, updateUserDto) {
         const user = await this.userRepository.findOne({ where: { email } });
         if (!user)
-            throw new common_1.NotFoundException('user not found');
+            throw new common_1.HttpException('Немає акаунту з цією адресою', common_1.HttpStatus.NOT_FOUND);
         return this.userRepository.update(email, updateUserDto);
     }
 };

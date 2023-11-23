@@ -1,3 +1,4 @@
+/// <reference types="multer" />
 export declare class IUser {
     id: string;
     email: string;
@@ -9,4 +10,7 @@ export declare class NotFoundResponse {
 }
 export declare class UploadImageResponse {
     imageUrl: string;
+}
+export declare class FileType {
+    file: Express.Multer.File;
 }

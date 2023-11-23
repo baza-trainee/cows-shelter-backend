@@ -21,6 +21,7 @@ const platform_express_1 = require("@nestjs/platform-express");
 const swagger_1 = require("@nestjs/swagger");
 const types_1 = require("../types");
 const cloudinary_service_1 = require("../cloudinary/cloudinary.service");
+const pdf_entity_1 = require("./entities/pdf.entity");
 let PdfController = class PdfController {
     constructor(pdfService, cloudinaryService) {
         this.pdfService = pdfService;
@@ -47,7 +48,8 @@ let PdfController = class PdfController {
             .then((data) => {
             return {
                 statusCode: 200,
-                image_url: data.secure_url,
+                document_url: data.secure_url,
+                document_id: data.public_id,
             };
         })
             .catch((err) => {
@@ -61,6 +63,18 @@ let PdfController = class PdfController {
 exports.PdfController = PdfController;
 __decorate([
     (0, common_1.Post)(),
+    (0, swagger_1.ApiBody)({
+        type: create_pdf_dto_1.CreatePdfDto,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'create pdf document',
+        type: pdf_entity_1.PDF,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_pdf_dto_1.CreatePdfDto]),
@@ -68,12 +82,40 @@ __decorate([
 ], PdfController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'get all pdfs',
+        type: [pdf_entity_1.PDF],
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'not found',
+        type: types_1.NotFoundResponse,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], PdfController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'get single pdf',
+        type: [pdf_entity_1.PDF],
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'not found',
+        type: types_1.NotFoundResponse,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -81,6 +123,23 @@ __decorate([
 ], PdfController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
+    (0, swagger_1.ApiBody)({
+        type: update_pdf_dto_1.UpdatePdfDto,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'update pdf',
+        type: pdf_entity_1.PDF,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'not found',
+        type: types_1.NotFoundResponse,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -89,6 +148,19 @@ __decorate([
 ], PdfController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'delete pdf',
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'not found',
+        type: types_1.NotFoundResponse,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -98,7 +170,7 @@ __decorate([
     (0, common_1.Post)('upload'),
     (0, swagger_1.ApiResponse)({
         status: 201,
-        description: 'upload image',
+        description: 'upload pdf',
         type: types_1.UploadImageResponse,
     }),
     (0, swagger_1.ApiResponse)({
@@ -108,7 +180,7 @@ __decorate([
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
     __param(0, (0, common_1.UploadedFile)(new common_1.ParseFilePipe({
         validators: [
-            new common_1.MaxFileSizeValidator({ maxSize: 1024 * 1024 * 4 }),
+            new common_1.MaxFileSizeValidator({ maxSize: 1024 * 1024 }),
             new common_1.FileTypeValidator({ fileType: '.(pdf)' }),
         ],
     }))),
@@ -117,6 +189,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PdfController.prototype, "uploadFile", null);
 exports.PdfController = PdfController = __decorate([
+    (0, swagger_1.ApiTags)('PDF'),
     (0, common_1.Controller)('pdf'),
     __metadata("design:paramtypes", [pdf_service_1.PdfService,
         cloudinary_service_1.CloudinaryService])

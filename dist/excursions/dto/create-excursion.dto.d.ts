@@ -3,7 +3,9 @@ export declare class CreateExcursionDto {
     title_en: string;
     description_ua: string;
     description_en: string;
-    amount: string;
-    duration: string;
+    amount_of_persons: string;
+    time_from: string;
+    time_to: string;
     image_url: string;
+    image_id: string;
 }

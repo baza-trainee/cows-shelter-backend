@@ -15,12 +15,13 @@ import {
 } from '@nestjs/common';
 import { GalleryService } from './gallery.service';
 import { CreateGalleryDto } from './dto/create-gallery.dto';
-import { ApiBody, ApiResponse } from '@nestjs/swagger';
+import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Gallery } from './entities/gallery.entity';
 import { NotFoundResponse, UploadImageResponse } from '../types';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
+@ApiTags('Gallery')
 @Controller('gallery')
 export class GalleryController {
   constructor(
@@ -131,6 +132,7 @@ export class GalleryController {
         return {
           statusCode: 200,
           image_url: data.secure_url,
+          image_id: data.public_id,
         };
       })
       .catch((err) => {

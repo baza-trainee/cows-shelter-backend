@@ -13,13 +13,7 @@ export class ReviewsService {
   ) {}
 
   async create(createReviewDto: CreateReviewDto) {
-    const newReview = {
-      name_ua: createReviewDto.name_ua,
-      name_en: createReviewDto.name_en,
-      text_ua: createReviewDto.text_ua,
-      text_en: createReviewDto.text_en,
-    };
-    return await this.reviewRepository.save(newReview);
+    return await this.reviewRepository.save(createReviewDto);
   }
 
   async findAll() {

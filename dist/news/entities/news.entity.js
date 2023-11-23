@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.News = void 0;
+const swagger_1 = require("@nestjs/swagger");
 const typeorm_1 = require("typeorm");
 let News = class News {
 };
@@ -19,25 +20,45 @@ __decorate([
     __metadata("design:type", Number)
 ], News.prototype, "id", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Title in Ua' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], News.prototype, "title_en", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Title in En' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], News.prototype, "title_ua", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Subitle in Ua' }),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], News.prototype, "subtitle_en", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Subitle in En' }),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], News.prototype, "subtitle_ua", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Text in Ua' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], News.prototype, "content_en", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Text in En' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], News.prototype, "content_ua", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Image Url' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], News.prototype, "image_url", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Image Id' }),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], News.prototype, "image_id", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)

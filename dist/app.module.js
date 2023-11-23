@@ -26,6 +26,8 @@ const mailing_module_1 = require("./mailing/mailing.module");
 const mailer_1 = require("@nestjs-modules/mailer");
 const handlebars_adapter_1 = require("@nestjs-modules/mailer/dist/adapters/handlebars.adapter");
 const cloudinary_module_1 = require("./cloudinary/cloudinary.module");
+const serve_static_1 = require("@nestjs/serve-static");
+const path_1 = require("path");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -43,6 +45,10 @@ exports.AppModule = AppModule = __decorate([
                     entities: [__dirname + '/**/*.entity{.js,.ts}'],
                 }),
                 inject: [config_1.ConfigService],
+            }),
+            serve_static_1.ServeStaticModule.forRoot({
+                rootPath: (0, path_1.join)(__dirname, '..', 'swagger-static'),
+                serveRoot: process.env.NODE_ENV === 'development' ? '/' : '/swagger',
             }),
             mailer_1.MailerModule.forRoot({
                 transport: 'smtps://user@domain.com:pass@smtp.domain.com',

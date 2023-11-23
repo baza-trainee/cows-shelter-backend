@@ -48,6 +48,7 @@ let GalleryController = class GalleryController {
             return {
                 statusCode: 200,
                 image_url: data.secure_url,
+                image_id: data.public_id,
             };
         })
             .catch((err) => {
@@ -164,6 +165,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], GalleryController.prototype, "uploadFile", null);
 exports.GalleryController = GalleryController = __decorate([
+    (0, swagger_1.ApiTags)('Gallery'),
     (0, common_1.Controller)('gallery'),
     __metadata("design:paramtypes", [gallery_service_1.GalleryService,
         cloudinary_service_1.CloudinaryService])

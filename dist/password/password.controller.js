@@ -15,26 +15,33 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PasswordController = void 0;
 const common_1 = require("@nestjs/common");
 const password_service_1 = require("./password.service");
-const jwt_1 = require("@nestjs/jwt");
-const mailing_service_1 = require("../mailing/mailing.service");
-const mailer_1 = require("@nestjs-modules/mailer");
+const swagger_1 = require("@nestjs/swagger");
+const reset_password_dto_1 = require("./dto/reset-password.dto");
+const change_password_dto_1 = require("./dto/change-password.dto");
+const types_1 = require("../types");
+const forgot_password_dto_1 = require("./dto/forgot-password.dto");
 let PasswordController = class PasswordController {
-    constructor(passwordService, jwtService, mailerService, mailingService) {
+    constructor(passwordService) {
         this.passwordService = passwordService;
-        this.jwtService = jwtService;
-        this.mailerService = mailerService;
-        this.mailingService = mailingService;
     }
     async forgotPassword(email) {
         return this.passwordService.sendMail(email);
     }
-    resetPassword(token, password, confirm_password) {
-        return this.passwordService.resetPassword(token, password, confirm_password);
+    resetPassword(resetPasswordDto) {
+        return this.passwordService.resetPassword(resetPasswordDto);
+    }
+    changePassword(changePasswordDto) {
+        return this.passwordService.changePassword(changePasswordDto);
     }
 };
 exports.PasswordController = PasswordController;
 __decorate([
     (0, common_1.Post)('forgot'),
+    (0, swagger_1.ApiBody)({ type: forgot_password_dto_1.ForgotPasswordDto }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
     __param(0, (0, common_1.Body)('email')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -42,18 +49,43 @@ __decorate([
 ], PasswordController.prototype, "forgotPassword", null);
 __decorate([
     (0, common_1.Post)('reset'),
-    __param(0, (0, common_1.Body)('token')),
-    __param(1, (0, common_1.Body)('password')),
-    __param(2, (0, common_1.Body)('confirm_password')),
+    (0, swagger_1.ApiBody)({ type: reset_password_dto_1.ResetPasswordDto }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'reset password', type: types_1.IUser }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'not found',
+        type: types_1.NotFoundResponse,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String, String]),
+    __metadata("design:paramtypes", [reset_password_dto_1.ResetPasswordDto]),
     __metadata("design:returntype", void 0)
 ], PasswordController.prototype, "resetPassword", null);
+__decorate([
+    (0, common_1.Post)('change'),
+    (0, swagger_1.ApiBody)({ type: change_password_dto_1.ChangePasswordDto }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'change password', type: types_1.IUser }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'not found',
+        type: types_1.NotFoundResponse,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [change_password_dto_1.ChangePasswordDto]),
+    __metadata("design:returntype", void 0)
+], PasswordController.prototype, "changePassword", null);
 exports.PasswordController = PasswordController = __decorate([
+    (0, swagger_1.ApiTags)('Password'),
     (0, common_1.Controller)('password'),
-    __metadata("design:paramtypes", [password_service_1.PasswordService,
-        jwt_1.JwtService,
-        mailer_1.MailerService,
-        mailing_service_1.MailingService])
+    __metadata("design:paramtypes", [password_service_1.PasswordService])
 ], PasswordController);
 //# sourceMappingURL=password.controller.js.map

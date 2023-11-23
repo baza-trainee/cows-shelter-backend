@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UploadImageResponse = exports.NotFoundResponse = exports.IUser = void 0;
+exports.FileType = exports.UploadImageResponse = exports.NotFoundResponse = exports.IUser = void 0;
 const swagger_1 = require("@nestjs/swagger");
 class IUser {
 }
@@ -34,7 +34,7 @@ __decorate([
     __metadata("design:type", Number)
 ], NotFoundResponse.prototype, "status_code", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ default: 'item with id=% doesn`t exist' }),
+    (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], NotFoundResponse.prototype, "message", void 0);
 class UploadImageResponse {
@@ -44,4 +44,11 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], UploadImageResponse.prototype, "imageUrl", void 0);
+class FileType {
+}
+exports.FileType = FileType;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Object)
+], FileType.prototype, "file", void 0);
 //# sourceMappingURL=index.js.map

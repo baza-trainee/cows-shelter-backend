@@ -8,20 +8,28 @@ const streamifier = require('streamifier');
 export class CloudinaryService {
   uploadFile(
     file: Express.Multer.File,
-    folder: string,
+    endFolder: string,
   ): Promise<CloudinaryResponse> {
     try {
       return new Promise<CloudinaryResponse>((resolve, reject) => {
         const uploadStream = cloudinary.uploader.upload_stream(
-          { folder: folder },
+          { folder: endFolder },
           (error, result) => {
             if (error) return reject(error);
             resolve(result);
-            console.log(result.secure_url);
           },
         );
         streamifier.createReadStream(file.buffer).pipe(uploadStream);
       });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async deleteFile(public_id: string) {
+    try {
+      await cloudinary.uploader.destroy(public_id);
+      return { success: true };
     } catch (error) {
       console.log(error);
     }

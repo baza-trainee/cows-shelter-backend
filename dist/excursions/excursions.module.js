@@ -12,6 +12,7 @@ const excursions_service_1 = require("./excursions.service");
 const excursions_controller_1 = require("./excursions.controller");
 const typeorm_1 = require("@nestjs/typeorm");
 const excursion_entity_1 = require("./entities/excursion.entity");
+const cloudinary_service_1 = require("../cloudinary/cloudinary.service");
 let ExcursionsModule = class ExcursionsModule {
 };
 exports.ExcursionsModule = ExcursionsModule;
@@ -19,7 +20,7 @@ exports.ExcursionsModule = ExcursionsModule = __decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([excursion_entity_1.Excursion])],
         controllers: [excursions_controller_1.ExcursionsController],
-        providers: [excursions_service_1.ExcursionsService],
+        providers: [excursions_service_1.ExcursionsService, cloudinary_service_1.CloudinaryService],
     })
 ], ExcursionsModule);
 //# sourceMappingURL=excursions.module.js.map

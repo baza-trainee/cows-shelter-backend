@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Password } from './entities/password.entity';
 import { Repository } from 'typeorm';
@@ -11,6 +7,9 @@ import { JwtService } from '@nestjs/jwt';
 import { MailingService } from '../mailing/mailing.service';
 import { UserService } from '../user/user.service';
 import * as argon2 from 'argon2';
+import { ResetPasswordDto } from './dto/reset-password.dto';
+import { ChangePasswordDto } from './dto/change-password.dto';
+import { CreatePasswordDto } from './dto/create-password.dto';
 
 @Injectable()
 export class PasswordService {
@@ -23,19 +22,19 @@ export class PasswordService {
     private readonly mailingService: MailingService,
   ) {}
 
-  async createToken(body: any) {
-    return await this.passwordRepository.save(body);
+  async createRecord(createPasswordDto: CreatePasswordDto) {
+    return await this.passwordRepository.save(createPasswordDto);
   }
 
-  public async sendMail(email: string) {
+  async sendMail(email: string) {
     const token = this.jwtService.sign({ email });
 
-    await this.createToken({
+    await this.createRecord({
       email,
       token,
     });
 
-    const url = `http://localhost:3000/reset/${token}`;
+    const url = `https://cows-shelter-frontend.vercel.app/reset/${token}`;
 
     await this.mailingService.setTransport();
     this.mailerService
@@ -61,28 +60,42 @@ export class PasswordService {
     };
   }
 
-  async findOne(data: any) {
-    this.passwordRepository.findOne(data);
-  }
+  async resetPassword(resetPasswordDto: ResetPasswordDto) {
+    const data: any = await this.passwordRepository.findOne({
+      where: {
+        token: resetPasswordDto.token,
+      },
+    });
 
-  public async resetPassword(
-    token: string,
-    password: string,
-    confirm_password: string,
-  ) {
-    if (password !== confirm_password) {
-      throw new BadRequestException('Passwords do not match');
+    const user = await this.userService.findOne(data.email);
+
+    if (!user) {
+      throw new HttpException(
+        'Немає акаунту з цією адресою',
+        HttpStatus.NOT_FOUND,
+      );
     }
-    const passwordReset: any = await this.findOne({ token });
 
-    const user = await this.userService.findOne(passwordReset.email);
-
-    if (!user) throw new NotFoundException('User Not Found');
-
-    const hashedPassword = await argon2.hash(password);
+    const hashedPassword = await argon2.hash(resetPasswordDto.password);
 
     await this.userService.updateUser(user.id, { password: hashedPassword });
 
-    return { success: true };
+    return user;
+  }
+
+  async changePassword(changePasswordDto: ChangePasswordDto) {
+    const user = await this.userService.findOne(changePasswordDto.email);
+
+    if (!user)
+      throw new HttpException(
+        'Немає акаунту з цією адресою',
+        HttpStatus.NOT_FOUND,
+      );
+
+    const hashedPassword = await argon2.hash(changePasswordDto.password);
+
+    await this.userService.updateUser(user.id, { password: hashedPassword });
+
+    return user;
   }
 }

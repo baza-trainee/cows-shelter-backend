@@ -20,9 +20,12 @@ const update_partner_dto_1 = require("./dto/update-partner.dto");
 const swagger_1 = require("@nestjs/swagger");
 const partner_entity_1 = require("./entities/partner.entity");
 const types_1 = require("../types");
+const cloudinary_service_1 = require("../cloudinary/cloudinary.service");
+const platform_express_1 = require("@nestjs/platform-express");
 let PartnersController = class PartnersController {
-    constructor(partnersService) {
+    constructor(partnersService, cloudinaryService) {
         this.partnersService = partnersService;
+        this.cloudinaryService = cloudinaryService;
     }
     create(createPartnerDto) {
         return this.partnersService.create(createPartnerDto);
@@ -35,6 +38,23 @@ let PartnersController = class PartnersController {
     }
     remove(id) {
         return this.partnersService.remove(+id);
+    }
+    async uploadFile(file) {
+        return await this.cloudinaryService
+            .uploadFile(file, 'logo')
+            .then((data) => {
+            return {
+                statusCode: 200,
+                image_url: data.secure_url,
+                image_id: data.public_id,
+            };
+        })
+            .catch((err) => {
+            return {
+                statusCode: 400,
+                message: err.message,
+            };
+        });
     }
 };
 exports.PartnersController = PartnersController;
@@ -110,8 +130,35 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], PartnersController.prototype, "remove", null);
+__decorate([
+    (0, common_1.Post)('upload'),
+    (0, swagger_1.ApiBody)({
+        type: types_1.FileType,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'upload image',
+        type: types_1.UploadImageResponse,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
+    __param(0, (0, common_1.UploadedFile)(new common_1.ParseFilePipe({
+        validators: [
+            new common_1.MaxFileSizeValidator({ maxSize: 1024 * 1024 }),
+            new common_1.FileTypeValidator({ fileType: '.(png|jpg|jpeg|webp)' }),
+        ],
+    }))),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], PartnersController.prototype, "uploadFile", null);
 exports.PartnersController = PartnersController = __decorate([
+    (0, swagger_1.ApiTags)('Partners'),
     (0, common_1.Controller)('partners'),
-    __metadata("design:paramtypes", [partners_service_1.PartnersService])
+    __metadata("design:paramtypes", [partners_service_1.PartnersService,
+        cloudinary_service_1.CloudinaryService])
 ], PartnersController);
 //# sourceMappingURL=partners.controller.js.map

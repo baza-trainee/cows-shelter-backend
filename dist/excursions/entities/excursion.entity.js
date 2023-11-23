@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Excursion = void 0;
+const swagger_1 = require("@nestjs/swagger");
 const typeorm_1 = require("typeorm");
 let Excursion = class Excursion {
 };
@@ -19,33 +20,50 @@ __decorate([
     __metadata("design:type", Number)
 ], Excursion.prototype, "id", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Title in En' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Excursion.prototype, "title_en", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Title in Ua' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Excursion.prototype, "title_ua", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Text in En' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Excursion.prototype, "description_en", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Text in Ua' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Excursion.prototype, "description_ua", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Amount of Persons for excursion' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Excursion.prototype, "amount", void 0);
+], Excursion.prototype, "amount_of_persons", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Min duration of excursion' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Excursion.prototype, "duration", void 0);
+], Excursion.prototype, "time_from", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Max duration of excursion' }),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Excursion.prototype, "time_to", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Image Url' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Excursion.prototype, "image_url", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'cloudinary public id for image' }),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Excursion.prototype, "image_id", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
