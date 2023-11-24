@@ -2195,11 +2195,16 @@ window.onload = function() {
             "document_url": {
               "type": "string",
               "description": "Url of the uploaded document"
+            },
+            "document_id": {
+              "type": "string",
+              "description": "Id of the uploaded document"
             }
           },
           "required": [
             "title",
-            "document_url"
+            "document_url",
+            "document_id"
           ]
         },
         "UpdatePdfDto": {

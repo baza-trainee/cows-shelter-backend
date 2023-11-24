@@ -25,11 +25,12 @@ export class ContactsService {
   }
 
   async update(id: number, updateContactDto: UpdateContactDto) {
-    const contacts = await this.contactsRepository.findOne({
+    const contact = await this.contactsRepository.findOne({
       where: { id },
     });
-    if (!contacts) throw new NotFoundException('This contacts not found');
-    return await this.contactsRepository.update(id, updateContactDto);
+    if (!contact) throw new NotFoundException('This contacts not found');
+    await this.contactsRepository.update(id, updateContactDto);
+    return { success: true };
   }
 
   async remove(id: number) {

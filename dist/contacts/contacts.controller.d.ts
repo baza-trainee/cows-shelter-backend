@@ -7,7 +7,9 @@ export declare class ContactsController {
     constructor(contactsService: ContactsService);
     create(createContactDto: CreateContactDto): Promise<CreateContactDto & Contacts>;
     findAll(): Promise<Contacts[]>;
-    update(id: string, updateContactDto: UpdateContactDto): Promise<import("typeorm").UpdateResult>;
+    update(id: string, updateContactDto: UpdateContactDto): Promise<{
+        success: boolean;
+    }>;
     remove(id: string): Promise<{
         success: boolean;
     }>;

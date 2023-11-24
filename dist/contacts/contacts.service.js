@@ -32,12 +32,13 @@ let ContactsService = class ContactsService {
         });
     }
     async update(id, updateContactDto) {
-        const contacts = await this.contactsRepository.findOne({
+        const contact = await this.contactsRepository.findOne({
             where: { id },
         });
-        if (!contacts)
+        if (!contact)
             throw new common_1.NotFoundException('This contacts not found');
-        return await this.contactsRepository.update(id, updateContactDto);
+        await this.contactsRepository.update(id, updateContactDto);
+        return { success: true };
     }
     async remove(id) {
         const contacts = await this.contactsRepository.findOne({

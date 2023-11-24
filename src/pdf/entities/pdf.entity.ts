@@ -19,6 +19,10 @@ export class PDF {
   @Column()
   document_url: string;
 
+  @ApiProperty({ description: 'Id of the uploaded document' })
+  @Column()
+  document_id: string;
+
   @CreateDateColumn()
   createdAt: Date;
 }
