@@ -30,6 +30,11 @@ __decorate([
     __metadata("design:type", String)
 ], PDF.prototype, "document_url", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Id of the uploaded document' }),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], PDF.prototype, "document_id", void 0);
+__decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
 ], PDF.prototype, "createdAt", void 0);
