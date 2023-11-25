@@ -31,6 +31,14 @@ let ReviewsService = class ReviewsService {
             },
         });
     }
+    async findOne(id) {
+        const post = await this.reviewRepository.findOne({
+            where: { id },
+        });
+        if (!post)
+            throw new common_1.NotFoundException('This excursion not found');
+        return post;
+    }
     async update(id, updateReviewDto) {
         const review = await this.reviewRepository.findOne({
             where: { id },

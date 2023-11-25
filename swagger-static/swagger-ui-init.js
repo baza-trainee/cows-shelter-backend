@@ -666,6 +666,43 @@ window.onload = function() {
           ]
         },
         "get": {
+          "operationId": "ExcursionsController_findAll",
+          "parameters": [],
+          "responses": {
+            "201": {
+              "description": "get all excursions",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Excursion"
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "Excursions"
+          ]
+        }
+      },
+      "/api/excursions/{id}": {
+        "get": {
           "operationId": "ExcursionsController_findOne",
           "parameters": [
             {
@@ -705,9 +742,7 @@ window.onload = function() {
           "tags": [
             "Excursions"
           ]
-        }
-      },
-      "/api/excursions/{id}": {
+        },
         "patch": {
           "operationId": "ExcursionsController_update",
           "parameters": [
@@ -1122,6 +1157,47 @@ window.onload = function() {
         }
       },
       "/api/reviews/{id}": {
+        "get": {
+          "operationId": "ReviewsController_findOne",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "get single excursion",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Review"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "Reviews"
+          ]
+        },
         "patch": {
           "operationId": "ReviewsController_update",
           "parameters": [

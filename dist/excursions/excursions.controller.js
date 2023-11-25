@@ -127,7 +127,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ExcursionsController.prototype, "findAll", null);
 __decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Get)(':id'),
     (0, swagger_1.ApiResponse)({
         status: 201,
         description: 'get single excursion',
