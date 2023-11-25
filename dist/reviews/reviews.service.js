@@ -37,7 +37,8 @@ let ReviewsService = class ReviewsService {
         });
         if (!review)
             throw new common_1.NotFoundException('This review not found');
-        return await this.reviewRepository.update(id, updateReviewDto);
+        await this.reviewRepository.update(id, updateReviewDto);
+        return { success: true };
     }
     async remove(id) {
         const review = await this.reviewRepository.findOne({
