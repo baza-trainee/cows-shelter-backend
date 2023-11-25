@@ -7,6 +7,7 @@ export declare class ReviewsService {
     constructor(reviewRepository: Repository<Review>);
     create(createReviewDto: CreateReviewDto): Promise<CreateReviewDto & Review>;
     findAll(): Promise<Review[]>;
+    findOne(id: number): Promise<Review>;
     update(id: number, updateReviewDto: UpdateReviewDto): Promise<{
         success: boolean;
     }>;

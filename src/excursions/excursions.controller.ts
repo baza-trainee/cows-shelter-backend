@@ -90,7 +90,7 @@ export class ExcursionsController {
     return this.excursionsService.findAll();
   }
 
-  @Get()
+  @Get(':id')
   @ApiResponse({
     status: 201,
     description: 'get single excursion',

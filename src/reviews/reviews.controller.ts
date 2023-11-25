@@ -45,6 +45,25 @@ export class ReviewsController {
     return this.reviewsService.findAll();
   }
 
+  @Get(':id')
+  @ApiResponse({
+    status: 201,
+    description: 'get single excursion',
+    type: Review,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'not found',
+    type: NotFoundResponse,
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'internal server error',
+  })
+  findOne(@Param('id') id: string) {
+    return this.reviewsService.findOne(+id);
+  }
+
   @Patch(':id')
   @ApiBody({ type: UpdateReviewDto })
   @ApiResponse({ status: 201, description: 'update review', type: Review })
