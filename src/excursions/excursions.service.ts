@@ -41,7 +41,8 @@ export class ExcursionsService {
       },
     });
     if (!excursion) throw new NotFoundException('This excursion not found');
-    return await this.excursionsRepository.update(id, updateExcursionDto);
+    await this.excursionsRepository.update(id, updateExcursionDto);
+    return { success: true };
   }
 
   async remove(id: number) {

@@ -10,7 +10,9 @@ export declare class ExcursionsService {
     create(createExcursionDto: CreateExcursionDto): Promise<CreateExcursionDto & Excursion>;
     findAll(): Promise<Excursion[]>;
     findOne(id: number): Promise<Excursion>;
-    update(id: number, updateExcursionDto: UpdateExcursionDto): Promise<import("typeorm").UpdateResult>;
+    update(id: number, updateExcursionDto: UpdateExcursionDto): Promise<{
+        success: boolean;
+    }>;
     remove(id: number): Promise<{
         success: boolean;
     }>;

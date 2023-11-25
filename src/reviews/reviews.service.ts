@@ -29,7 +29,8 @@ export class ReviewsService {
       where: { id },
     });
     if (!review) throw new NotFoundException('This review not found');
-    return await this.reviewRepository.update(id, updateReviewDto);
+    await this.reviewRepository.update(id, updateReviewDto);
+    return { success: true };
   }
 
   async remove(id: number) {

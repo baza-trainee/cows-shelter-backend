@@ -7,7 +7,9 @@ export declare class ReviewsService {
     constructor(reviewRepository: Repository<Review>);
     create(createReviewDto: CreateReviewDto): Promise<CreateReviewDto & Review>;
     findAll(): Promise<Review[]>;
-    update(id: number, updateReviewDto: UpdateReviewDto): Promise<import("typeorm").UpdateResult>;
+    update(id: number, updateReviewDto: UpdateReviewDto): Promise<{
+        success: boolean;
+    }>;
     remove(id: number): Promise<{
         success: boolean;
     }>;
