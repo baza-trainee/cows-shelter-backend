@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FileType = exports.UploadImageResponse = exports.NotFoundResponse = exports.IUser = void 0;
+exports.NewsResponse = exports.ExcursionResponse = exports.PartnerResponse = exports.ImageResponse = exports.FileType = exports.UploadImageResponse = exports.NotFoundResponse = exports.IUser = void 0;
 const swagger_1 = require("@nestjs/swagger");
 class IUser {
 }
@@ -51,4 +51,48 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Object)
 ], FileType.prototype, "file", void 0);
+class ImageResponse {
+}
+exports.ImageResponse = ImageResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Array)
+], ImageResponse.prototype, "images", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ImageResponse.prototype, "totalLength", void 0);
+class PartnerResponse {
+}
+exports.PartnerResponse = PartnerResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Array)
+], PartnerResponse.prototype, "partners", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], PartnerResponse.prototype, "totalLength", void 0);
+class ExcursionResponse {
+}
+exports.ExcursionResponse = ExcursionResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Array)
+], ExcursionResponse.prototype, "excursions", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], ExcursionResponse.prototype, "totalLength", void 0);
+class NewsResponse {
+}
+exports.NewsResponse = NewsResponse;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Array)
+], NewsResponse.prototype, "news", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", Number)
+], NewsResponse.prototype, "totalLength", void 0);
 //# sourceMappingURL=index.js.map

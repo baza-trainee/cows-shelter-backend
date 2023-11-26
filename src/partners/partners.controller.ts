@@ -19,7 +19,12 @@ import { CreatePartnerDto } from './dto/create-partner.dto';
 import { UpdatePartnerDto } from './dto/update-partner.dto';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Partner } from './entities/partner.entity';
-import { FileType, NotFoundResponse, UploadImageResponse } from '../types';
+import {
+  FileType,
+  NotFoundResponse,
+  PartnerResponse,
+  UploadImageResponse,
+} from '../types';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 
@@ -35,7 +40,7 @@ export class PartnersController {
   @ApiResponse({
     status: 201,
     description: 'get all partners with pagination',
-    type: [Partner],
+    type: PartnerResponse,
   })
   @ApiResponse({
     status: 404,
