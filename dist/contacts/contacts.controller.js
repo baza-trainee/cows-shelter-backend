@@ -123,6 +123,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ContactsController.prototype, "remove", null);
 exports.ContactsController = ContactsController = __decorate([
+    (0, swagger_1.ApiTags)('Contacts'),
     (0, common_1.Controller)('contacts'),
     __metadata("design:paramtypes", [contacts_service_1.ContactsService])
 ], ContactsController);

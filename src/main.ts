@@ -13,7 +13,7 @@ async function bootstrap() {
     .setTitle('Cows Shelter example')
     .setDescription('The cows shelter API description')
     .setVersion('1.0')
-    .addTag('cows')
+    .addTag('Cows Shelter')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/swagger', app, document);

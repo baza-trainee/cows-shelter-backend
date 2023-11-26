@@ -62,7 +62,11 @@ let GalleryController = class GalleryController {
 exports.GalleryController = GalleryController;
 __decorate([
     (0, common_1.Get)('pagination'),
-    (0, swagger_1.ApiResponse)({ status: 201, description: 'get all images', type: [gallery_entity_1.Gallery] }),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'get all images',
+        type: [gallery_entity_1.Gallery],
+    }),
     (0, swagger_1.ApiResponse)({
         status: 404,
         description: 'not found',

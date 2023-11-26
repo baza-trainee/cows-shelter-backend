@@ -30,7 +30,11 @@ export class GalleryController {
   ) {}
 
   @Get('pagination')
-  @ApiResponse({ status: 201, description: 'get all images', type: [Gallery] })
+  @ApiResponse({
+    status: 201,
+    description: 'get all images',
+    type: [Gallery],
+  })
   @ApiResponse({
     status: 404,
     description: 'not found',

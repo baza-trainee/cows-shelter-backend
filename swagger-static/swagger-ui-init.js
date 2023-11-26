@@ -1366,7 +1366,10 @@ window.onload = function() {
             "500": {
               "description": "internal server error"
             }
-          }
+          },
+          "tags": [
+            "Contacts"
+          ]
         },
         "get": {
           "operationId": "ContactsController_findAll",
@@ -1398,7 +1401,10 @@ window.onload = function() {
             "500": {
               "description": "internal server error"
             }
-          }
+          },
+          "tags": [
+            "Contacts"
+          ]
         }
       },
       "/api/contacts/{id}": {
@@ -1448,7 +1454,10 @@ window.onload = function() {
             "500": {
               "description": "internal server error"
             }
-          }
+          },
+          "tags": [
+            "Contacts"
+          ]
         },
         "delete": {
           "operationId": "ContactsController_remove",
@@ -1479,7 +1488,10 @@ window.onload = function() {
             "500": {
               "description": "internal server error"
             }
-          }
+          },
+          "tags": [
+            "Contacts"
+          ]
         }
       },
       "/api/pdf": {
@@ -1827,7 +1839,7 @@ window.onload = function() {
     },
     "tags": [
       {
-        "name": "cows",
+        "name": "Cows Shelter",
         "description": ""
       }
     ],
