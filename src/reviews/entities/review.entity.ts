@@ -21,11 +21,11 @@ export class Review {
 
   @ApiProperty({ description: 'Review text  in ukrainian' })
   @Column()
-  text_ua: string;
+  review_ua: string;
 
   @ApiProperty({ description: 'Review text in english' })
   @Column()
-  text_en: string;
+  review_en: string;
 
   @CreateDateColumn()
   createdAt: Date;

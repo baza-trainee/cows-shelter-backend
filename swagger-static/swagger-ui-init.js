@@ -2215,18 +2215,18 @@ window.onload = function() {
             "name_en": {
               "type": "string"
             },
-            "text_ua": {
+            "review_ua": {
               "type": "string"
             },
-            "text_en": {
+            "review_en": {
               "type": "string"
             }
           },
           "required": [
             "name_ua",
             "name_en",
-            "text_ua",
-            "text_en"
+            "review_ua",
+            "review_en"
           ]
         },
         "Review": {
@@ -2240,11 +2240,11 @@ window.onload = function() {
               "type": "string",
               "description": "Reviewer`s name in english"
             },
-            "text_ua": {
+            "review_ua": {
               "type": "string",
               "description": "Review text  in ukrainian"
             },
-            "text_en": {
+            "review_en": {
               "type": "string",
               "description": "Review text in english"
             }
@@ -2252,8 +2252,8 @@ window.onload = function() {
           "required": [
             "name_ua",
             "name_en",
-            "text_ua",
-            "text_en"
+            "review_ua",
+            "review_en"
           ]
         },
         "UpdateReviewDto": {

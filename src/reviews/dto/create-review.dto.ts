@@ -12,9 +12,9 @@ export class CreateReviewDto {
 
   @ApiProperty()
   @IsString()
-  text_ua: string;
+  review_ua: string;
 
   @ApiProperty()
   @IsString()
-  text_en: string;
+  review_en: string;
 }
