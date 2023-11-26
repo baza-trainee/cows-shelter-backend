@@ -12,5 +12,8 @@ export declare class GalleryService {
     remove(id: number): Promise<{
         success: boolean;
     }>;
-    findAllWithPagination(page: number, limit: number): Promise<Gallery[]>;
+    findAllWithPagination(page: number, limit: number): Promise<{
+        images: Gallery[];
+        totalLength: number;
+    }>;
 }

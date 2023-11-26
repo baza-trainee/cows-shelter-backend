@@ -60,6 +60,8 @@ let NewsService = class NewsService {
         return { success: true };
     }
     async findAllWithPagination(page, limit) {
+        const allPosts = await this.findAll();
+        const totalLength = allPosts.length;
         const posts = await this.newsRepository.find({
             order: {
                 createdAt: 'DESC',
@@ -67,7 +69,7 @@ let NewsService = class NewsService {
             take: limit,
             skip: (page - 1) * limit,
         });
-        return posts;
+        return { posts, totalLength };
     }
 };
 exports.NewsService = NewsService;

@@ -13,4 +13,8 @@ export declare class PartnersService {
     remove(id: number): Promise<{
         success: boolean;
     }>;
+    findAllWithPagination(page: number, limit: number): Promise<{
+        posts: Partner[];
+        totalLength: number;
+    }>;
 }

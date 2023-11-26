@@ -16,5 +16,8 @@ export declare class ExcursionsService {
     remove(id: number): Promise<{
         success: boolean;
     }>;
-    findAllWithPagination(page: number, limit: number): Promise<Excursion[]>;
+    findAllWithPagination(page: number, limit: number): Promise<{
+        excursions: Excursion[];
+        totalLength: number;
+    }>;
 }
