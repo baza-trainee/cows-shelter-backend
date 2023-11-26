@@ -130,7 +130,10 @@ window.onload = function() {
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/PartnerResponse"
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Partner"
+                    }
                   }
                 }
               }
@@ -371,7 +374,10 @@ window.onload = function() {
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/NewsResponse"
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/News"
+                    }
                   }
                 }
               }
@@ -653,7 +659,10 @@ window.onload = function() {
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/ExcursionResponse"
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Excursion"
+                    }
                   }
                 }
               }
@@ -935,7 +944,10 @@ window.onload = function() {
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/ImageResponse"
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Gallery"
+                    }
                   }
                 }
               }
@@ -1856,22 +1868,31 @@ window.onload = function() {
             "access_token"
           ]
         },
-        "PartnerResponse": {
+        "Partner": {
           "type": "object",
           "properties": {
-            "partners": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+            "name": {
+              "type": "string",
+              "description": "Partner`s name"
             },
-            "totalLength": {
-              "type": "number"
+            "logo": {
+              "type": "string",
+              "description": "Partner`s logo"
+            },
+            "link": {
+              "type": "string",
+              "description": "Link to partner`s website"
+            },
+            "image_id": {
+              "type": "string",
+              "description": "cloudinary public id of the image"
             }
           },
           "required": [
-            "partners",
-            "totalLength"
+            "name",
+            "logo",
+            "link",
+            "image_id"
           ]
         },
         "NotFoundResponse": {
@@ -1913,33 +1934,6 @@ window.onload = function() {
             "image_id"
           ]
         },
-        "Partner": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "Partner`s name"
-            },
-            "logo": {
-              "type": "string",
-              "description": "Partner`s logo"
-            },
-            "link": {
-              "type": "string",
-              "description": "Link to partner`s website"
-            },
-            "image_id": {
-              "type": "string",
-              "description": "cloudinary public id of the image"
-            }
-          },
-          "required": [
-            "name",
-            "logo",
-            "link",
-            "image_id"
-          ]
-        },
         "UpdatePartnerDto": {
           "type": "object",
           "properties": {}
@@ -1964,63 +1958,6 @@ window.onload = function() {
           },
           "required": [
             "imageUrl"
-          ]
-        },
-        "NewsResponse": {
-          "type": "object",
-          "properties": {
-            "news": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "totalLength": {
-              "type": "number"
-            }
-          },
-          "required": [
-            "news",
-            "totalLength"
-          ]
-        },
-        "CreateNewsDto": {
-          "type": "object",
-          "properties": {
-            "title_ua": {
-              "type": "string"
-            },
-            "title_en": {
-              "type": "string"
-            },
-            "subtitle_ua": {
-              "type": "string"
-            },
-            "subtitle_en": {
-              "type": "string"
-            },
-            "content_ua": {
-              "type": "string"
-            },
-            "content_en": {
-              "type": "string"
-            },
-            "image_url": {
-              "type": "string"
-            },
-            "image_id": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "title_ua",
-            "title_en",
-            "subtitle_ua",
-            "subtitle_en",
-            "content_ua",
-            "content_en",
-            "image_url",
-            "image_id"
           ]
         },
         "News": {
@@ -2070,6 +2007,45 @@ window.onload = function() {
             "image_id"
           ]
         },
+        "CreateNewsDto": {
+          "type": "object",
+          "properties": {
+            "title_ua": {
+              "type": "string"
+            },
+            "title_en": {
+              "type": "string"
+            },
+            "subtitle_ua": {
+              "type": "string"
+            },
+            "subtitle_en": {
+              "type": "string"
+            },
+            "content_ua": {
+              "type": "string"
+            },
+            "content_en": {
+              "type": "string"
+            },
+            "image_url": {
+              "type": "string"
+            },
+            "image_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "title_ua",
+            "title_en",
+            "subtitle_ua",
+            "subtitle_en",
+            "content_ua",
+            "content_en",
+            "image_url",
+            "image_id"
+          ]
+        },
         "UpdateNewsDto": {
           "type": "object",
           "properties": {
@@ -2098,67 +2074,6 @@ window.onload = function() {
               "type": "string"
             }
           }
-        },
-        "ExcursionResponse": {
-          "type": "object",
-          "properties": {
-            "excursions": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "totalLength": {
-              "type": "number"
-            }
-          },
-          "required": [
-            "excursions",
-            "totalLength"
-          ]
-        },
-        "CreateExcursionDto": {
-          "type": "object",
-          "properties": {
-            "title_ua": {
-              "type": "string"
-            },
-            "title_en": {
-              "type": "string"
-            },
-            "description_ua": {
-              "type": "string"
-            },
-            "description_en": {
-              "type": "string"
-            },
-            "amount_of_persons": {
-              "type": "string"
-            },
-            "time_from": {
-              "type": "string"
-            },
-            "time_to": {
-              "type": "string"
-            },
-            "image_url": {
-              "type": "string"
-            },
-            "image_id": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "title_ua",
-            "title_en",
-            "description_ua",
-            "description_en",
-            "amount_of_persons",
-            "time_from",
-            "time_to",
-            "image_url",
-            "image_id"
-          ]
         },
         "Excursion": {
           "type": "object",
@@ -2212,31 +2127,30 @@ window.onload = function() {
             "image_id"
           ]
         },
-        "UpdateExcursionDto": {
-          "type": "object",
-          "properties": {}
-        },
-        "ImageResponse": {
+        "CreateExcursionDto": {
           "type": "object",
           "properties": {
-            "images": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+            "title_ua": {
+              "type": "string"
             },
-            "totalLength": {
-              "type": "number"
-            }
-          },
-          "required": [
-            "images",
-            "totalLength"
-          ]
-        },
-        "CreateGalleryDto": {
-          "type": "object",
-          "properties": {
+            "title_en": {
+              "type": "string"
+            },
+            "description_ua": {
+              "type": "string"
+            },
+            "description_en": {
+              "type": "string"
+            },
+            "amount_of_persons": {
+              "type": "string"
+            },
+            "time_from": {
+              "type": "string"
+            },
+            "time_to": {
+              "type": "string"
+            },
             "image_url": {
               "type": "string"
             },
@@ -2245,9 +2159,20 @@ window.onload = function() {
             }
           },
           "required": [
+            "title_ua",
+            "title_en",
+            "description_ua",
+            "description_en",
+            "amount_of_persons",
+            "time_from",
+            "time_to",
             "image_url",
             "image_id"
           ]
+        },
+        "UpdateExcursionDto": {
+          "type": "object",
+          "properties": {}
         },
         "Gallery": {
           "type": "object",
@@ -2259,6 +2184,21 @@ window.onload = function() {
             "image_id": {
               "type": "string",
               "description": "cloudinary public id of the image"
+            }
+          },
+          "required": [
+            "image_url",
+            "image_id"
+          ]
+        },
+        "CreateGalleryDto": {
+          "type": "object",
+          "properties": {
+            "image_url": {
+              "type": "string"
+            },
+            "image_id": {
+              "type": "string"
             }
           },
           "required": [

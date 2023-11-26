@@ -19,12 +19,7 @@ import { CreateNewsDto } from './dto/create-news.dto';
 import { UpdateNewsDto } from './dto/update-news.dto';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { News } from './entities/news.entity';
-import {
-  FileType,
-  NewsResponse,
-  NotFoundResponse,
-  UploadImageResponse,
-} from 'src/types';
+import { FileType, NotFoundResponse, UploadImageResponse } from 'src/types';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 
@@ -40,7 +35,7 @@ export class NewsController {
   @ApiResponse({
     status: 201,
     description: 'get all posts by pages',
-    type: NewsResponse,
+    type: [News],
   })
   @ApiResponse({
     status: 404,

@@ -69,7 +69,7 @@ __decorate([
     (0, swagger_1.ApiResponse)({
         status: 201,
         description: 'get all posts by pages',
-        type: types_1.ExcursionResponse,
+        type: [excursion_entity_1.Excursion],
     }),
     (0, swagger_1.ApiResponse)({
         status: 404,

@@ -17,7 +17,7 @@ import { GalleryService } from './gallery.service';
 import { CreateGalleryDto } from './dto/create-gallery.dto';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Gallery } from './entities/gallery.entity';
-import { ImageResponse, NotFoundResponse, UploadImageResponse } from '../types';
+import { NotFoundResponse, UploadImageResponse } from '../types';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
@@ -33,7 +33,7 @@ export class GalleryController {
   @ApiResponse({
     status: 201,
     description: 'get all images',
-    type: ImageResponse,
+    type: [Gallery],
   })
   @ApiResponse({
     status: 404,
