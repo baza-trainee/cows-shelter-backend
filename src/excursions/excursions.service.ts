@@ -60,6 +60,8 @@ export class ExcursionsService {
   }
 
   async findAllWithPagination(page: number, limit: number) {
+    const allExcurions = await this.findAll();
+    const totalLength = allExcurions.length;
     const excursions = await this.excursionsRepository.find({
       order: {
         createdAt: 'DESC',
@@ -67,6 +69,6 @@ export class ExcursionsService {
       take: limit,
       skip: (page - 1) * limit,
     });
-    return excursions;
+    return { excursions, totalLength };
   }
 }

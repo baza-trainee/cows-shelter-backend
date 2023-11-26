@@ -8,6 +8,10 @@ export declare class PartnersController {
     private readonly partnersService;
     private readonly cloudinaryService;
     constructor(partnersService: PartnersService, cloudinaryService: CloudinaryService);
+    findAllWithPagination(req: any, page?: number, limit?: number): Promise<{
+        posts: Partner[];
+        totalLength: number;
+    }>;
     create(createPartnerDto: CreatePartnerDto): Promise<CreatePartnerDto & Partner>;
     findAll(): Promise<Partner[]>;
     update(id: string, updatePartnerDto: UpdatePartnerDto): Promise<import("typeorm").UpdateResult>;

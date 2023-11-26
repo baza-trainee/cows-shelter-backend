@@ -11,6 +11,8 @@ import {
   ParseFilePipe,
   UploadedFile,
   UseInterceptors,
+  Query,
+  Req,
 } from '@nestjs/common';
 import { PartnersService } from './partners.service';
 import { CreatePartnerDto } from './dto/create-partner.dto';
@@ -28,6 +30,29 @@ export class PartnersController {
     private readonly partnersService: PartnersService,
     private readonly cloudinaryService: CloudinaryService,
   ) {}
+
+  @Get('pagination')
+  @ApiResponse({
+    status: 201,
+    description: 'get all partners with pagination',
+    type: [Partner],
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'not found',
+    type: NotFoundResponse,
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'internal server error',
+  })
+  findAllWithPagination(
+    @Req() req,
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 2,
+  ) {
+    return this.partnersService.findAllWithPagination(+page, +limit);
+  }
 
   @Post()
   @ApiBody({ type: CreatePartnerDto })

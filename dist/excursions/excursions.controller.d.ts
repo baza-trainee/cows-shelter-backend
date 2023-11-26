@@ -8,7 +8,10 @@ export declare class ExcursionsController {
     private readonly excursionsService;
     private readonly cloudinaryService;
     constructor(excursionsService: ExcursionsService, cloudinaryService: CloudinaryService);
-    findAllWithPagination(req: any, page?: number, limit?: number): Promise<Excursion[]>;
+    findAllWithPagination(req: any, page?: number, limit?: number): Promise<{
+        excursions: Excursion[];
+        totalLength: number;
+    }>;
     create(createExcursionDto: CreateExcursionDto): Promise<CreateExcursionDto & Excursion>;
     findAll(): Promise<Excursion[]>;
     findOne(id: string): Promise<Excursion>;

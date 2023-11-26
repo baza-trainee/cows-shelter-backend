@@ -14,5 +14,8 @@ export declare class NewsService {
     remove(id: number): Promise<{
         success: boolean;
     }>;
-    findAllWithPagination(page: number, limit: number): Promise<News[]>;
+    findAllWithPagination(page: number, limit: number): Promise<{
+        posts: News[];
+        totalLength: number;
+    }>;
 }

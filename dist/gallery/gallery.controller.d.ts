@@ -7,7 +7,10 @@ export declare class GalleryController {
     private readonly galleryService;
     private readonly cloudinaryService;
     constructor(galleryService: GalleryService, cloudinaryService: CloudinaryService);
-    findAllWithPagination(req: any, page?: number, limit?: number): Promise<Gallery[]>;
+    findAllWithPagination(req: any, page?: number, limit?: number): Promise<{
+        images: Gallery[];
+        totalLength: number;
+    }>;
     create(createGalleryDto: CreateGalleryDto): Promise<CreateGalleryDto & Gallery>;
     findAll(): Promise<Gallery[]>;
     findOne(id: string): Promise<Gallery>;

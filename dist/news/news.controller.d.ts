@@ -8,7 +8,10 @@ export declare class NewsController {
     private readonly newsService;
     private readonly cloudinaryService;
     constructor(newsService: NewsService, cloudinaryService: CloudinaryService);
-    findAllWithPagination(req: any, page?: number, limit?: number): Promise<News[]>;
+    findAllWithPagination(req: any, page?: number, limit?: number): Promise<{
+        posts: News[];
+        totalLength: number;
+    }>;
     create(createNewsDto: CreateNewsDto): Promise<CreateNewsDto & News>;
     findAll(): Promise<News[]>;
     findOne(id: string): Promise<News>;

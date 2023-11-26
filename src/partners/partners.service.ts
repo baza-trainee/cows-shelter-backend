@@ -50,4 +50,17 @@ export class PartnersService {
     await this.partnerRepository.delete(id);
     return { success: true };
   }
+
+  async findAllWithPagination(page: number, limit: number) {
+    const allPartners = await this.findAll();
+    const totalLength = allPartners.length;
+    const posts = await this.partnerRepository.find({
+      order: {
+        createdAt: 'DESC',
+      },
+      take: limit,
+      skip: (page - 1) * limit,
+    });
+    return { posts, totalLength };
+  }
 }

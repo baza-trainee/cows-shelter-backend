@@ -53,6 +53,8 @@ let GalleryService = class GalleryService {
         return { success: true };
     }
     async findAllWithPagination(page, limit) {
+        const allImages = await this.findAll();
+        const totalLength = allImages.length;
         const images = await this.galleryRepository.find({
             order: {
                 createdAt: 'DESC',
@@ -60,7 +62,7 @@ let GalleryService = class GalleryService {
             take: limit,
             skip: (page - 1) * limit,
         });
-        return images;
+        return { images, totalLength };
     }
 };
 exports.GalleryService = GalleryService;

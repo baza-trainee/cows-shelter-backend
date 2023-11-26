@@ -103,6 +103,60 @@ window.onload = function() {
           ]
         }
       },
+      "/api/partners/pagination": {
+        "get": {
+          "operationId": "PartnersController_findAllWithPagination",
+          "parameters": [
+            {
+              "name": "page",
+              "required": true,
+              "in": "query",
+              "schema": {
+                "type": "number"
+              }
+            },
+            {
+              "name": "limit",
+              "required": true,
+              "in": "query",
+              "schema": {
+                "type": "number"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "get all partners with pagination",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Partner"
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "Partners"
+          ]
+        }
+      },
       "/api/partners": {
         "post": {
           "operationId": "PartnersController_create",
@@ -1814,29 +1868,6 @@ window.onload = function() {
             "access_token"
           ]
         },
-        "CreatePartnerDto": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "logo": {
-              "type": "string"
-            },
-            "link": {
-              "type": "string"
-            },
-            "image_id": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "name",
-            "logo",
-            "link",
-            "image_id"
-          ]
-        },
         "Partner": {
           "type": "object",
           "properties": {
@@ -1878,6 +1909,29 @@ window.onload = function() {
           "required": [
             "status_code",
             "message"
+          ]
+        },
+        "CreatePartnerDto": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "logo": {
+              "type": "string"
+            },
+            "link": {
+              "type": "string"
+            },
+            "image_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "logo",
+            "link",
+            "image_id"
           ]
         },
         "UpdatePartnerDto": {
