@@ -19,7 +19,12 @@ import { CreateExcursionDto } from './dto/create-excursion.dto';
 import { UpdateExcursionDto } from './dto/update-excursion.dto';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Excursion } from './entities/excursion.entity';
-import { FileType, NotFoundResponse, UploadImageResponse } from '../types';
+import {
+  ExcursionResponse,
+  FileType,
+  NotFoundResponse,
+  UploadImageResponse,
+} from '../types';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
@@ -35,7 +40,7 @@ export class ExcursionsController {
   @ApiResponse({
     status: 201,
     description: 'get all posts by pages',
-    type: [Excursion],
+    type: ExcursionResponse,
   })
   @ApiResponse({
     status: 404,
