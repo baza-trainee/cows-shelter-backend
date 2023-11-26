@@ -65,7 +65,7 @@ __decorate([
     (0, swagger_1.ApiResponse)({
         status: 201,
         description: 'get all images',
-        type: types_1.ImageResponse,
+        type: [gallery_entity_1.Gallery],
     }),
     (0, swagger_1.ApiResponse)({
         status: 404,

@@ -66,7 +66,7 @@ __decorate([
     (0, swagger_1.ApiResponse)({
         status: 201,
         description: 'get all partners with pagination',
-        type: types_1.PartnerResponse,
+        type: [partner_entity_1.Partner],
     }),
     (0, swagger_1.ApiResponse)({
         status: 404,

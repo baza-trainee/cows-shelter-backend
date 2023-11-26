@@ -69,7 +69,7 @@ __decorate([
     (0, swagger_1.ApiResponse)({
         status: 201,
         description: 'get all posts by pages',
-        type: types_1.NewsResponse,
+        type: [news_entity_1.News],
     }),
     (0, swagger_1.ApiResponse)({
         status: 404,
