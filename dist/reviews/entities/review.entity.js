@@ -33,12 +33,12 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Review text  in ukrainian' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Review.prototype, "text_ua", void 0);
+], Review.prototype, "review_ua", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Review text in english' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Review.prototype, "text_en", void 0);
+], Review.prototype, "review_en", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)

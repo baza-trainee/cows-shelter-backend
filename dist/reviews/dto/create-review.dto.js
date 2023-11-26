@@ -29,10 +29,10 @@ __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateReviewDto.prototype, "text_ua", void 0);
+], CreateReviewDto.prototype, "review_ua", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateReviewDto.prototype, "text_en", void 0);
+], CreateReviewDto.prototype, "review_en", void 0);
 //# sourceMappingURL=create-review.dto.js.map
