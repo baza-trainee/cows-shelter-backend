@@ -8,5 +8,8 @@ export declare class PasswordController {
         message: string;
     }>;
     resetPassword(resetPasswordDto: ResetPasswordDto): Promise<import("../user/entities/user.entity").User>;
-    changePassword(changePasswordDto: ChangePasswordDto): Promise<import("../user/entities/user.entity").User>;
+    changePassword(changePasswordDto: ChangePasswordDto): Promise<{
+        user: import("../user/entities/user.entity").User;
+        token: string;
+    }>;
 }
