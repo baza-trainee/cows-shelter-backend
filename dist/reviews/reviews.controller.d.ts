@@ -5,6 +5,10 @@ import { Review } from './entities/review.entity';
 export declare class ReviewsController {
     private readonly reviewsService;
     constructor(reviewsService: ReviewsService);
+    findAllWithPagination(req: any, page?: number, limit?: number): Promise<{
+        reviews: Review[];
+        totalLength: number;
+    }>;
     create(createReviewDto: CreateReviewDto): Promise<CreateReviewDto & Review>;
     findAll(): Promise<Review[]>;
     findOne(id: string): Promise<Review>;

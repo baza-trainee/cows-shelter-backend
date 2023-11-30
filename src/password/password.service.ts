@@ -94,10 +94,11 @@ export class PasswordService {
 
     const hashedPassword = await argon2.hash(changePasswordDto.password);
 
-    const token = this.jwtService.sign({ email: changePasswordDto.email });
-
     await this.userService.updateUser(user.id, { password: hashedPassword });
 
-    return { user, token };
+    return {
+      email: user.email,
+      access_token: this.jwtService.sign({ id: user.id, email: user.email }),
+    };
   }
 }

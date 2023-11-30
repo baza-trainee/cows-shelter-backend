@@ -14,4 +14,8 @@ export declare class ReviewsService {
     remove(id: number): Promise<{
         success: boolean;
     }>;
+    findAllWithPagination(page: number, limit: number): Promise<{
+        reviews: Review[];
+        totalLength: number;
+    }>;
 }

@@ -6,6 +6,8 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
+  Req,
 } from '@nestjs/common';
 import { ReviewsService } from './reviews.service';
 import { CreateReviewDto } from './dto/create-review.dto';
@@ -18,6 +20,29 @@ import { NotFoundResponse } from '../types';
 @Controller('reviews')
 export class ReviewsController {
   constructor(private readonly reviewsService: ReviewsService) {}
+
+  @Get('pagination')
+  @ApiResponse({
+    status: 201,
+    description: 'get all images',
+    type: [Review],
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'not found',
+    type: NotFoundResponse,
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'internal server error',
+  })
+  findAllWithPagination(
+    @Req() req,
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 2,
+  ) {
+    return this.reviewsService.findAllWithPagination(+page, +limit);
+  }
 
   @Post()
   @ApiBody({ type: CreateReviewDto })

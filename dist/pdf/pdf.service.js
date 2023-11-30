@@ -17,9 +17,11 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const pdf_entity_1 = require("./entities/pdf.entity");
+const cloudinary_service_1 = require("../cloudinary/cloudinary.service");
 let PdfService = class PdfService {
-    constructor(pdfRepository) {
+    constructor(pdfRepository, cloudinaryService) {
         this.pdfRepository = pdfRepository;
+        this.cloudinaryService = cloudinaryService;
     }
     async create(createPdfDto) {
         return await this.pdfRepository.save(createPdfDto);
@@ -57,6 +59,7 @@ let PdfService = class PdfService {
         });
         if (!pdf)
             throw new common_1.NotFoundException('This pdf document not found');
+        await this.cloudinaryService.deleteFile(pdf.document_id);
         await this.pdfRepository.delete(id);
         return {
             success: true,
@@ -67,6 +70,7 @@ exports.PdfService = PdfService;
 exports.PdfService = PdfService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(pdf_entity_1.PDF)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        cloudinary_service_1.CloudinaryService])
 ], PdfService);
 //# sourceMappingURL=pdf.service.js.map

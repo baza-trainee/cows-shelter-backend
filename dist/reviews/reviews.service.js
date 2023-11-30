@@ -57,6 +57,18 @@ let ReviewsService = class ReviewsService {
         await this.reviewRepository.delete(id);
         return { success: true };
     }
+    async findAllWithPagination(page, limit) {
+        const allReviews = await this.findAll();
+        const totalLength = allReviews.length;
+        const reviews = await this.reviewRepository.find({
+            order: {
+                createdAt: 'DESC',
+            },
+            take: limit,
+            skip: (page - 1) * limit,
+        });
+        return { reviews, totalLength };
+    }
 };
 exports.ReviewsService = ReviewsService;
 exports.ReviewsService = ReviewsService = __decorate([
