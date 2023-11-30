@@ -24,6 +24,9 @@ let ReviewsController = class ReviewsController {
     constructor(reviewsService) {
         this.reviewsService = reviewsService;
     }
+    findAllWithPagination(req, page = 1, limit = 2) {
+        return this.reviewsService.findAllWithPagination(+page, +limit);
+    }
     create(createReviewDto) {
         return this.reviewsService.create(createReviewDto);
     }
@@ -41,6 +44,29 @@ let ReviewsController = class ReviewsController {
     }
 };
 exports.ReviewsController = ReviewsController;
+__decorate([
+    (0, common_1.Get)('pagination'),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'get all images',
+        type: [review_entity_1.Review],
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'not found',
+        type: types_1.NotFoundResponse,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'internal server error',
+    }),
+    __param(0, (0, common_1.Req)()),
+    __param(1, (0, common_1.Query)('page')),
+    __param(2, (0, common_1.Query)('limit')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Number, Number]),
+    __metadata("design:returntype", void 0)
+], ReviewsController.prototype, "findAllWithPagination", null);
 __decorate([
     (0, common_1.Post)(),
     (0, swagger_1.ApiBody)({ type: create_review_dto_1.CreateReviewDto }),

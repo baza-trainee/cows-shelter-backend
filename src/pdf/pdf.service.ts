@@ -4,12 +4,14 @@ import { UpdatePdfDto } from './dto/update-pdf.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { PDF } from './entities/pdf.entity';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Injectable()
 export class PdfService {
   constructor(
     @InjectRepository(PDF)
     private readonly pdfRepository: Repository<PDF>,
+    private readonly cloudinaryService: CloudinaryService,
   ) {}
 
   async create(createPdfDto: CreatePdfDto) {
@@ -49,6 +51,7 @@ export class PdfService {
       },
     });
     if (!pdf) throw new NotFoundException('This pdf document not found');
+    await this.cloudinaryService.deleteFile(pdf.document_id);
     await this.pdfRepository.delete(id);
     return {
       success: true,

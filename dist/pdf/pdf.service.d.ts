@@ -2,9 +2,11 @@ import { CreatePdfDto } from './dto/create-pdf.dto';
 import { UpdatePdfDto } from './dto/update-pdf.dto';
 import { Repository } from 'typeorm';
 import { PDF } from './entities/pdf.entity';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 export declare class PdfService {
     private readonly pdfRepository;
-    constructor(pdfRepository: Repository<PDF>);
+    private readonly cloudinaryService;
+    constructor(pdfRepository: Repository<PDF>, cloudinaryService: CloudinaryService);
     create(createPdfDto: CreatePdfDto): Promise<CreatePdfDto & PDF>;
     findAll(): Promise<PDF[]>;
     findOne(id: number): Promise<PDF>;

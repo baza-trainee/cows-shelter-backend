@@ -1141,6 +1141,60 @@ window.onload = function() {
           ]
         }
       },
+      "/api/reviews/pagination": {
+        "get": {
+          "operationId": "ReviewsController_findAllWithPagination",
+          "parameters": [
+            {
+              "name": "page",
+              "required": true,
+              "in": "query",
+              "schema": {
+                "type": "number"
+              }
+            },
+            {
+              "name": "limit",
+              "required": true,
+              "in": "query",
+              "schema": {
+                "type": "number"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "get all images",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Review"
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "Reviews"
+          ]
+        }
+      },
       "/api/reviews": {
         "post": {
           "operationId": "ReviewsController_create",
@@ -2206,29 +2260,6 @@ window.onload = function() {
             "image_id"
           ]
         },
-        "CreateReviewDto": {
-          "type": "object",
-          "properties": {
-            "name_ua": {
-              "type": "string"
-            },
-            "name_en": {
-              "type": "string"
-            },
-            "review_ua": {
-              "type": "string"
-            },
-            "review_en": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "name_ua",
-            "name_en",
-            "review_ua",
-            "review_en"
-          ]
-        },
         "Review": {
           "type": "object",
           "properties": {
@@ -2247,6 +2278,29 @@ window.onload = function() {
             "review_en": {
               "type": "string",
               "description": "Review text in english"
+            }
+          },
+          "required": [
+            "name_ua",
+            "name_en",
+            "review_ua",
+            "review_en"
+          ]
+        },
+        "CreateReviewDto": {
+          "type": "object",
+          "properties": {
+            "name_ua": {
+              "type": "string"
+            },
+            "name_en": {
+              "type": "string"
+            },
+            "review_ua": {
+              "type": "string"
+            },
+            "review_en": {
+              "type": "string"
             }
           },
           "required": [

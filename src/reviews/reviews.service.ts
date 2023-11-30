@@ -49,4 +49,17 @@ export class ReviewsService {
     await this.reviewRepository.delete(id);
     return { success: true };
   }
+
+  async findAllWithPagination(page: number, limit: number) {
+    const allReviews = await this.findAll();
+    const totalLength = allReviews.length;
+    const reviews = await this.reviewRepository.find({
+      order: {
+        createdAt: 'DESC',
+      },
+      take: limit,
+      skip: (page - 1) * limit,
+    });
+    return { reviews, totalLength };
+  }
 }
