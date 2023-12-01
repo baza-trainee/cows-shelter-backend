@@ -14,7 +14,7 @@ export declare class PartnersService {
         success: boolean;
     }>;
     findAllWithPagination(page: number, limit: number): Promise<{
-        posts: Partner[];
+        partners: Partner[];
         totalLength: number;
     }>;
 }

@@ -54,13 +54,13 @@ export class PartnersService {
   async findAllWithPagination(page: number, limit: number) {
     const allPartners = await this.findAll();
     const totalLength = allPartners.length;
-    const posts = await this.partnerRepository.find({
+    const partners = await this.partnerRepository.find({
       order: {
         createdAt: 'DESC',
       },
       take: limit,
       skip: (page - 1) * limit,
     });
-    return { posts, totalLength };
+    return { partners, totalLength };
   }
 }
