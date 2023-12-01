@@ -9,7 +9,7 @@ export declare class PartnersController {
     private readonly cloudinaryService;
     constructor(partnersService: PartnersService, cloudinaryService: CloudinaryService);
     findAllWithPagination(req: any, page?: number, limit?: number): Promise<{
-        posts: Partner[];
+        partners: Partner[];
         totalLength: number;
     }>;
     create(createPartnerDto: CreatePartnerDto): Promise<CreatePartnerDto & Partner>;
