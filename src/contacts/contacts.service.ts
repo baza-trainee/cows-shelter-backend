@@ -17,11 +17,7 @@ export class ContactsService {
   }
 
   async findAll() {
-    return this.contactsRepository.find({
-      order: {
-        createdAt: 'DESC',
-      },
-    });
+    return this.contactsRepository.find();
   }
 
   async update(id: number, updateContactDto: UpdateContactDto) {
