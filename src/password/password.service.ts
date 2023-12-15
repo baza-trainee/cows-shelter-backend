@@ -60,6 +60,19 @@ export class PasswordService {
     };
   }
 
+  async remove(id: number) {
+    const user = await this.passwordRepository.findOne({
+      where: { id },
+    });
+    if (!user)
+      throw new HttpException(
+        'Немає акаунту з цією адресою',
+        HttpStatus.NOT_FOUND,
+      );
+    await this.passwordRepository.delete(id);
+    return { success: true };
+  }
+
   async resetPassword(resetPasswordDto: ResetPasswordDto) {
     const data: any = await this.passwordRepository.findOne({
       where: {
@@ -79,6 +92,8 @@ export class PasswordService {
     const hashedPassword = await argon2.hash(resetPasswordDto.password);
 
     await this.userService.updateUser(user.id, { password: hashedPassword });
+
+    await this.remove(data.id);
 
     return user;
   }
